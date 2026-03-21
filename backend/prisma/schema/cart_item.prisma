@@ -1,0 +1,13 @@
+model CartItem {
+    id String @id @default(cuid())
+    count Int @default(1)
+
+    cartId String @map("cart_id")
+    cart Cart @relation(fields: [cartId], references: [id], onDelete: Cascade)
+
+    smartphoneId String @map("smartphone_id")
+    smartphone Smartphone @relation(fields: [smartphoneId], references: [id])
+
+    @@unique([cartId, smartphoneId])
+    @@map("cart_item")
+}

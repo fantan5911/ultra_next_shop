@@ -1,0 +1,38 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "b": "bun build ./src/index.ts --outdir ./dist --target node",
+    "prod": "bun run dist/index.js"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.5.0",
+    "@prisma/client": "^7.5.0",
+    "argon2": "^0.44.0",
+    "cookie-parser": "latest",
+    "cors": "latest",
+    "dotenv": "^17.3.1",
+    "express": "latest",
+    "jsonwebtoken": "^9.0.3",
+    "nodemailer": "^8.0.2",
+    "pg": "^8.20.0",
+    "tsx": "^4.21.0",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/argon2": "^0.15.4",
+    "@types/bun": "latest",
+    "@types/cookie-parser": "latest",
+    "@types/cors": "latest",
+    "@types/dotenv": "^8.2.3",
+    "@types/express": "latest",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^25.5.0",
+    "@types/nodemailer": "^7.0.11",
+    "@types/pg": "^8.18.0",
+    "prisma": "^7.5.0",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,23 @@
+model User {
+    id String @id @default(cuid())
+
+    email String @unique
+    password String
+
+    name String @unique
+    avatarUrl String? @map("avatar_url")
+
+    activationLink String @unique @default(cuid())
+    isActivated Boolean @default(false)
+    isBanned Boolean @default(false)
+
+    cart Cart?
+    smartphones Smartphone[]
+
+    refreshToken Token?
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@map("users")
+}
