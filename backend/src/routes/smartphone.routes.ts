@@ -6,6 +6,8 @@ const router = Router();
 
 router.post("/add", AuthMiddleware({checkBan: true}), smartphoneController.addSmartphone);
 router.get("/", smartphoneController.getSmartphones);
+router.get("/id/:id", smartphoneController.getSmartPhoneById);
+router.get("/user/:id", smartphoneController.getSmartphonesByUserId);
 
 
 

@@ -1,4 +1,4 @@
-import { PAGES } from "@/shared/config/pages.config";
+import { PAGES } from "@/config/pages.config";
 import Link from "next/link";
 
 

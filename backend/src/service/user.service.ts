@@ -7,6 +7,7 @@ import { ENV } from "../env";
 import UserDto from "../dto/user.dto";
 import tokenService from "./token.service";
 import { IUser } from "../types/user.types";
+import cartService from "./cart.service";
 
 class UserService {
     async Register(email: string, name: string, password: string) {
@@ -24,12 +25,12 @@ class UserService {
                 name: name
             },
             include: {
-                cart: true,
-                smartphones: true
+                smartphones: true,
+                cart: true
             }
         })
+        const cart = await cartService.createCart(user.id);
         // await mailService.sendActivationMail(email, `${ENV.API_URL}/api/users/activate/${user.activationLink}`);
-
         const userDto = new UserDto(user);
         const tokens = tokenService.generateTokens({...userDto});
         await tokenService.saveToken(user.id, tokens.refreshToken);
@@ -88,6 +89,9 @@ class UserService {
         if (!user) {
             throw ApiError.BadRequest('Некорректная ссылка для активации');
         }
+        if (user.isActivated === true) {
+            throw ApiError.BadRequest('Аккаунт уже активирован');
+        }
         const updatedUser = await prisma.user.update({
             where: {activationLink: activationLink},
             data: {isActivated: true}
@@ -99,7 +103,7 @@ class UserService {
             where: {id: userId}
         });
         if (!user) {
-            throw ApiError.NotFound('Данного пользователя нет');
+            throw ApiError.NotFound('Пользователя с данным id нет');
         }
         const updatedUser = await prisma.user.update({
             where: {id: userId},
