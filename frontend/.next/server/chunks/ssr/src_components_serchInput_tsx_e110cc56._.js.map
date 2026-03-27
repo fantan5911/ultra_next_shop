@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Code/ultra_next_shop/frontend/src/components/serchInput.tsx"],"sourcesContent":["'use client'\r\nimport { useState } from \"react\"\r\n\r\n\r\nexport function SearchInput() {\r\n    const [search, setSearch] = useState('');\r\n\r\n    return <input type=\"text\"\r\n    value={search}\r\n    onChange={e => setSearch(e.target.value)}\r\n    placeholder=\"Поиск...\"\r\n    className=\"w-[45%] border border-solid py-1.5\r\n     font-sans px-7 bg-white/5\r\n     border-white/20 rounded-3xl outline-none\r\n     focus:border-white/60 transition-colors duration-200\r\n     \"\r\n    />\r\n}"],"names":[],"mappings":";;;;AACA;AADA;;;AAIO,SAAS;IACZ,MAAM,CAAC,QAAQ,UAAU,GAAG,CAAA,GAAA,qMAAA,CAAA,WAAQ,AAAD,EAAE;IAErC,qBAAO,8OAAC;QAAM,MAAK;QACnB,OAAO;QACP,UAAU,CAAA,IAAK,UAAU,EAAE,MAAM,CAAC,KAAK;QACvC,aAAY;QACZ,WAAU;;;;;;AAMd","debugId":null}}]
+}

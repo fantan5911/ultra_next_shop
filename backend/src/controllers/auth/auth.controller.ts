@@ -91,6 +91,16 @@ class AuthController {
             next(e);
         }
     }
+    async getUserByName(req: Request, res: Response, next: NextFunction) {
+        try {
+            const name = req.params.name as string;
+            const user = await userService.getUserByName(name);
+            return res.status(200).json(user);
+        }
+        catch (e) {
+            next(e);
+        }
+    }
 }
 
 export default new AuthController();

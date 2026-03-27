@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Code/ultra_next_shop/frontend/src/app/%28public%29/smartphone/%5Bid%5D/page.tsx"],"sourcesContent":["'use client';\r\n\r\nimport { usePathname } from \"next/navigation\";\r\n\r\nexport default function SmartphonePage() {\r\n    const pathname = usePathname();\r\n    console.log(pathname.lastIndexOf);\r\n    pathname.lastIndexOf\r\n    return (\r\n        <div>\r\n            \r\n        </div>\r\n    )\r\n}"],"names":[],"mappings":";;;;AAEA;AAFA;;;AAIe,SAAS;IACpB,MAAM,WAAW,CAAA,GAAA,kIAAA,CAAA,cAAW,AAAD;IAC3B,QAAQ,GAAG,CAAC,SAAS,WAAW;IAChC,SAAS,WAAW;IACpB,qBACI,8OAAC;;;;;AAIT","debugId":null}},
+    {"offset": {"line": 30, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Code/ultra_next_shop/frontend/node_modules/next/navigation.js"],"sourcesContent":["module.exports = require('./dist/client/components/navigation')\n"],"names":[],"mappings":"AAAA,OAAO,OAAO","ignoreList":[0],"debugId":null}}]
+}

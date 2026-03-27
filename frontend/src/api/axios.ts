@@ -1,5 +1,5 @@
 import { API_URL } from "@/constants/api.url";
-import { AuthResponse } from "@/shared/types/auth.response";
+import { AuthResponse } from "@/shared/response/auth.response";
 import axios from "axios";
 
 

@@ -3,7 +3,7 @@ import { RegisterForm } from "../../../components/RegisterForm";
 
 
 export const metadata: Metadata = {
-    title: 'Register page',
+    title: 'Регистрация',
     description: 'A register account on Mono shop'
 }
 

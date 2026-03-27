@@ -6,6 +6,8 @@ import { FormError } from "@/components/UI/FormError";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import authService from "@/service/auth.service";
+import { useRouter } from "next/navigation";
+import { PAGES } from "@/config/pages.config";
 
 export interface RegisterFormData {
     email: string;
@@ -18,12 +20,15 @@ export function RegisterForm() {
     const [name, setName] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
+    const router = useRouter();
+
     const formMethods = useForm<RegisterFormData>({
         mode: 'onSubmit'
     });
 
     const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
         await authService.Register(data.email, data.name, data.password);
+        router.push(PAGES.HOME);
     }
 
     const EmailError = formMethods.formState.errors.email;
@@ -42,9 +47,9 @@ export function RegisterForm() {
                 placeholder="Введите email"
                 required="Обязательное поле"
                 minLength={5}
-                minLenghtMessage="Почта не должна быть менее 5 символов"
+                minLenghtMessage="Почта должна быть не менее 5 символов"
                 maxLength={40}
-                maxLengthMessage="Почта не должна быть более 40 символов"
+                maxLengthMessage="Почта должна быть не более 40 символов"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 />
@@ -74,9 +79,9 @@ export function RegisterForm() {
                 placeholder="Введите пароль"
                 required="Обязательное поле"
                 minLength={8}
-                minLenghtMessage="Пароль не должен быть менее 8 символов"
+                minLenghtMessage="Пароль должен быть не менее 8 символов"
                 maxLength={45}
-                maxLengthMessage="Пароль не должен быть более 45 символов"
+                maxLengthMessage="Пароль должен быть не более 45 символов"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 />

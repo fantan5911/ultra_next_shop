@@ -7,25 +7,73 @@ class SmartPhoneService {
         const smartphones = await prisma.smartphone.findMany({
             take: limit,
             skip: (page - 1) * limit,
+            select: {
+                id: true,
+                name: true,
+                description: true,
+                specifications: true,
+                price: true,
+                imageUrl: true,
+                brand: {
+                    select: {
+                        name: true
+                    }
+                }
+            }
         });
-        return smartphones;
+        return smartphones.map(smartphone => ({
+            ...smartphone,
+            brand: smartphone.brand.name
+        }));
     }
 
     async getSmartPhoneById(id: string) {
         const smartphone = await prisma.smartphone.findUnique({
-            where: {id: id}
-        })
+            where: { id: id },
+            select: {
+                id: true,
+                name: true,
+                description: true,
+                specifications: true,
+                price: true,
+                imageUrl: true,
+                brand: {
+                    select: {
+                        name: true
+                    }
+                },
+            }
+        });
         if (!smartphone) {
             throw ApiError.NotFound("Смартфон не найден");
         }
-        return smartphone;
+        return {
+            ...smartphone,
+            brand: smartphone.brand.name
+        };
     }
     
     async getSmartphonesByUserId(userId: string) {
         const smartphones = await prisma.smartphone.findMany({
-            where: {userId: userId}
-        })
-        return smartphones;
+            where: { userId: userId },
+            select: {
+                id: true,
+                name: true,
+                description: true,
+                specifications: true,
+                price: true,
+                imageUrl: true,
+                brand: {
+                    select: {
+                        name: true
+                    }
+                }
+            }
+        });
+        return smartphones.map(smartphone => ({
+            ...smartphone,
+            brand: smartphone.brand.name
+        }));
     }
 
     async addSmartphone
@@ -43,21 +91,32 @@ class SmartPhoneService {
             throw ApiError.BadRequest("Нет данного бренда");
         }
         const smartphone = await prisma.smartphone.create({
-            data: {
-                userId: userId,
-                name: name,
-                description: description,
-                specifications: specifications,
-                brandId: brandId,
-                price: price
-            },
-            include: {
-                user: true,
-                brand: true,
-                cart_items: true
+        data: {
+            userId: userId,
+            name: name,
+            description: description,
+            specifications: specifications,
+            brandId: brandId,
+            price: price
+        },
+        select: {
+            id: true,
+            name: true,
+            description: true,
+            specifications: true,
+            price: true,
+            imageUrl: true,
+            brand: {
+                select: {
+                    name: true
+                }
             }
-        })
-        return smartphone;
+        }
+    });
+        return {
+            ...smartphone,
+            brand: smartphone.brand.name
+        };
     }
 }
 

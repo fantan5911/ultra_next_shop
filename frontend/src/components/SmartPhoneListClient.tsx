@@ -1,0 +1,35 @@
+'use client'
+
+import { ISmartphone } from "@/shared/types/smartphone.types";
+import { useSmartPhoneStore } from "@/store/smartphone.store";
+import { useEffect } from "react";
+import { SmartPhoneCard } from "./SmartPhoneCard";
+
+interface SmartPhoneListClientProps {
+    smartphones: ISmartphone[];
+}
+
+export function SmartPhoneListClient({smartphones}: SmartPhoneListClientProps) {
+    const storeSmartphones = useSmartPhoneStore(state => state.smartPhones);
+    const setSmartphones = useSmartPhoneStore(state => state.setSmartphones);
+
+    useEffect(() => {
+        setSmartphones(smartphones);
+    }, [smartphones, setSmartphones]);
+
+    return (
+        <>
+            {storeSmartphones.map((smartphone: ISmartphone) => (
+                <SmartPhoneCard 
+                    key={smartphone.id}
+                    id={smartphone.id}
+                    alt={smartphone.name}
+                    src="/test_iphone.png"
+                    brand={smartphone.brand}
+                    name={smartphone.name}
+                    price={smartphone.price}
+                />
+            ))}
+        </>
+    );
+}

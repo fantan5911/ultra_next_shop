@@ -12,7 +12,7 @@ class AuthService {
         })
         return response;
     }
-    async Login(email: string, name: string, password: string): Promise<AxiosResponse<AuthResponse>> {
+    async Login(email: string, name: string, password: string) {
         const response = await api.post<AuthResponse>('/users/login', {
             email: email,
             name: name,

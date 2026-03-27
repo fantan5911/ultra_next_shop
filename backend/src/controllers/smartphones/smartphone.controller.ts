@@ -18,7 +18,7 @@ class smartPhoneController {
     }
     async getSmartPhoneById(req: Request, res: Response, next: NextFunction) {
         try {
-            const {id} = req.body;
+            const id = req.params.id as string;
             const smartphone = await smartphoneService.getSmartPhoneById(id);
 
             return res.status(200).json(smartphone);

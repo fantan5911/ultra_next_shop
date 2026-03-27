@@ -126,6 +126,15 @@ class UserService {
         }
         return user;
     }
+    async getUserByName(name: string) {
+        const user = await prisma.user.findUnique({
+            where: {name: name}
+        })
+        if (!user) {
+            throw ApiError.NotFound("Пользователь с данным id не найден");
+        }
+        return user;
+    }
 }
 
 export default new UserService();
