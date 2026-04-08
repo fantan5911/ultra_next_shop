@@ -4,9 +4,13 @@ import { PropsWithChildren } from "react";
 
 export default function Layout({children}: PropsWithChildren) {
     return (
-        <div>
-            <NavBar />
-            {children}
-        </div>
+        <>
+            <header>
+                <NavBar />
+            </header>
+            <main>
+                {children}
+            </main>
+        </>
     )
 }

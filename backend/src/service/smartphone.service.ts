@@ -3,7 +3,7 @@ import ApiError from "../errors/api.error";
 
 
 class SmartPhoneService {
-    async getSmartphones(limit: number = 16, page: number = 1) {
+    async getSmartphones(limit: number = 8, page: number = 1) {
         const smartphones = await prisma.smartphone.findMany({
             take: limit,
             skip: (page - 1) * limit,
@@ -14,6 +14,11 @@ class SmartPhoneService {
                 specifications: true,
                 price: true,
                 imageUrl: true,
+                user: {
+                    select: {
+                        username: true
+                    }
+                },
                 brand: {
                     select: {
                         name: true
@@ -23,6 +28,7 @@ class SmartPhoneService {
         });
         return smartphones.map(smartphone => ({
             ...smartphone,
+            user: smartphone.user.username,
             brand: smartphone.brand.name
         }));
     }
@@ -37,6 +43,11 @@ class SmartPhoneService {
                 specifications: true,
                 price: true,
                 imageUrl: true,
+                user: {
+                    select: {
+                        username: true
+                    }
+                },
                 brand: {
                     select: {
                         name: true
@@ -49,6 +60,7 @@ class SmartPhoneService {
         }
         return {
             ...smartphone,
+            user: smartphone.user.username,
             brand: smartphone.brand.name
         };
     }
@@ -63,6 +75,11 @@ class SmartPhoneService {
                 specifications: true,
                 price: true,
                 imageUrl: true,
+                user: {
+                    select: {
+                        username: true
+                    }
+                },
                 brand: {
                     select: {
                         name: true
@@ -72,12 +89,13 @@ class SmartPhoneService {
         });
         return smartphones.map(smartphone => ({
             ...smartphone,
+            user: smartphone.user.username,
             brand: smartphone.brand.name
         }));
     }
 
     async addSmartphone
-    (userId: string, name: string, description: string, specifications: string, brandId: string, price: number) {
+    (userId: string, name: string, description: string, specifications: string, imageUrl: string, brandId: string, price: number) {
         const searchedUser = await prisma.user.findUnique({
             where: {id: userId}
         });
@@ -96,6 +114,7 @@ class SmartPhoneService {
             name: name,
             description: description,
             specifications: specifications,
+            imageUrl: imageUrl,
             brandId: brandId,
             price: price
         },
@@ -106,6 +125,11 @@ class SmartPhoneService {
             specifications: true,
             price: true,
             imageUrl: true,
+            user: {
+                select: {
+                    username: true
+                }
+            },
             brand: {
                 select: {
                     name: true
@@ -115,6 +139,7 @@ class SmartPhoneService {
     });
         return {
             ...smartphone,
+            user: smartphone.user.username,
             brand: smartphone.brand.name
         };
     }

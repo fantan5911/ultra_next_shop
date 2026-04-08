@@ -27,7 +27,8 @@ __turbopack_context__.s({
 });
 const PAGES = {
     HOME: "/",
-    SMARTPHONE: (smartphoneId)=>`/smartphone/${smartphoneId}`
+    SMARTPHONE: (smartphoneId)=>`/smartphone/${smartphoneId}`,
+    USER: (username)=>`/user/${username}`
 };
 }}),
 "[project]/src/components/SmartPhoneCard.tsx [app-ssr] (ecmascript)": ((__turbopack_context__) => {
@@ -50,7 +51,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navi
 function SmartPhoneCard({ id, src, brand, name, price, alt }) {
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "w-[95%] rounded-3xl gap-3 flex flex-col items-center   border border-solid border-white/10 bg-white/5 pb-4 cursor-pointer hover:scale-[102%]   hover:border-white/30 transition-all duration-200 group   ",
+        className: "w-[95%] rounded-3xl gap-3 flex flex-col items-center   border border-solid border-white/10 bg-white/5 pb-4 cursor-pointer hover:scale-[102%]   hover:border-white/30 transition-all duration-200 group mb-4   ",
         onClick: ()=>router.push(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$pages$2e$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PAGES"].SMARTPHONE(id)),
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -151,10 +152,12 @@ function SmartPhoneListClient({ smartphones }) {
         smartphones,
         setSmartphones
     ]);
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "grid grid-cols-4",
         children: storeSmartphones.map((smartphone)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$SmartPhoneCard$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SmartPhoneCard"], {
                 id: smartphone.id,
                 alt: smartphone.name,
+                // src={smartphone.imageUrl === null ? smartphone.name : smartphone.imageUrl}
                 src: "/test_iphone.png",
                 brand: smartphone.brand,
                 name: smartphone.name,
@@ -162,9 +165,13 @@ function SmartPhoneListClient({ smartphones }) {
             }, smartphone.id, false, {
                 fileName: "[project]/src/components/SmartPhoneListClient.tsx",
                 lineNumber: 23,
-                columnNumber: 17
+                columnNumber: 21
             }, this))
-    }, void 0, false);
+    }, void 0, false, {
+        fileName: "[project]/src/components/SmartPhoneListClient.tsx",
+        lineNumber: 21,
+        columnNumber: 9
+    }, this);
 }
 }}),
 

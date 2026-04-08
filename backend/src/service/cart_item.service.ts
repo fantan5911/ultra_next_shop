@@ -18,7 +18,7 @@ class cartItemService {
         }
         const searchedCartItem = await prisma.cartItem.findFirst({
             where: {
-                OR: [
+                AND: [
                     {cartId: cartId},
                     {smartphoneId: smartphoneId}
                 ]

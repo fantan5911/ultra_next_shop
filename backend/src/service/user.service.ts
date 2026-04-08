@@ -10,19 +10,25 @@ import { IUser } from "../types/user.types";
 import cartService from "./cart.service";
 
 class UserService {
-    async Register(email: string, name: string, password: string) {
+    async Register(email: string, username: string, password: string) {
         const searchedUser = await prisma.user.findUnique({
             where: {email}
         })
         if (searchedUser) {
             throw ApiError.BadRequest(`Пользователь с почтой ${email} уже существует`);
         }
+        const usernameCandidate = await prisma.user.findUnique({
+            where: {username: username.toLowerCase()}
+        })
+        if (usernameCandidate) {
+            throw ApiError.BadRequest(`Пользователь с именем ${username} уже существует`);
+        }
         const hashPassword = await argon2.hash(password, argon2_config);
         const user = await prisma.user.create({
             data: {
                 email: email,
                 password: hashPassword,
-                name: name
+                username: username.toLowerCase(),
             },
             include: {
                 smartphones: true,
@@ -52,7 +58,7 @@ class UserService {
         }
         const userDto = new UserDto(user);
         const tokens = tokenService.generateTokens({...userDto});
-        const data = tokenService.saveToken(user.id, tokens.refreshToken);
+        await tokenService.saveToken(user.id, tokens.refreshToken);
 
         return {...tokens, user: userDto}
     }
@@ -111,6 +117,13 @@ class UserService {
                 isBanned: isBanned
             }
         });
+        if (isBanned) {
+            await prisma.smartphone.deleteMany({
+                where: {
+                    userId: userId
+                }
+            })
+        }
         return updatedUser;
     }
     async GetUsers() {
@@ -126,14 +139,18 @@ class UserService {
         }
         return user;
     }
-    async getUserByName(name: string) {
+    async getUserByName(username: string) {
         const user = await prisma.user.findUnique({
-            where: {name: name}
+            where: {username: username}
         })
         if (!user) {
-            throw ApiError.NotFound("Пользователь с данным id не найден");
+            throw ApiError.NotFound("Пользователь с данным username не найден");
         }
-        return user;
+        return {
+            username: user.username,
+            avatarUrl: user.avatarUrl,
+            isBanned: user.isBanned
+        }
     }
 }
 

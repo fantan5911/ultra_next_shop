@@ -11,13 +11,13 @@ import { PAGES } from "@/config/pages.config";
 
 export interface RegisterFormData {
     email: string;
-    name: string;
+    username: string;
     password: string;
 }
 
 export function RegisterForm() {
     const [email, setEmail] = useState<string>('');
-    const [name, setName] = useState<string>('');
+    const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
     const router = useRouter();
@@ -27,12 +27,12 @@ export function RegisterForm() {
     });
 
     const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
-        await authService.Register(data.email, data.name, data.password);
+        await authService.Register(data.email, data.username, data.password);
         router.push(PAGES.HOME);
     }
 
     const EmailError = formMethods.formState.errors.email;
-    const NameError = formMethods.formState.errors.name;
+    const UsernameError = formMethods.formState.errors.username;
     const PasswordError = formMethods.formState.errors.password;
 
     return (
@@ -57,7 +57,7 @@ export function RegisterForm() {
                 {EmailError && <FormError error={EmailError} />}
 
                 <AuthorizationInput
-                registerName="name"
+                registerName="username"
                 formMethods={formMethods}
                 type="text"
                 placeholder="Введите никнейм"
@@ -66,11 +66,11 @@ export function RegisterForm() {
                 minLenghtMessage="Никнейм должен быть не менее 3 символов"
                 maxLength={20}
                 maxLengthMessage="Никнейм должен быть не более 20 символов"
-                value={name}
-                onChange={e => setName(e.target.value)}
+                value={username}
+                onChange={e => setUsername(e.target.value)}
                 />
 
-                {NameError && <FormError error={NameError} />}
+                {UsernameError && <FormError error={UsernameError} />}
 
                 <AuthorizationInput
                 registerName="password"
@@ -89,7 +89,7 @@ export function RegisterForm() {
                 {PasswordError && <FormError error={PasswordError} />}
 
                 <AuthorizationButton>
-                    Регистрация
+                    Создать аккаунт
                 </AuthorizationButton>
 
             </form>

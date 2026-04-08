@@ -19,7 +19,7 @@ access.txt
 /coverage
 
 # next.js
-/.next/
+.next
 /out/
 
 # production

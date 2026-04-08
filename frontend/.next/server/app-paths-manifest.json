@@ -1,6 +1,8 @@
 {
   "/(public)/(home)/page": "app/(public)/(home)/page.js",
+  "/(public)/404/page": "app/(public)/404/page.js",
   "/(public)/register/page": "app/(public)/register/page.js",
   "/(public)/smartphone/[id]/page": "app/(public)/smartphone/[id]/page.js",
+  "/(public)/user/[username]/page": "app/(public)/user/[username]/page.js",
   "/_not-found/page": "app/_not-found/page.js"
 }

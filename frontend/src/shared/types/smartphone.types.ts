@@ -5,5 +5,6 @@ export interface ISmartphone {
     specifications: string;
     price: number;
     imageUrl: string | null;
+    user: string;
     brand: string;
 }

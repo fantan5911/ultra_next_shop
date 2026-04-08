@@ -8,8 +8,8 @@ import { ENV } from "../../env";
 class AuthController {
     async Register(req: Request, res: Response, next: NextFunction) {
         try {
-            const {email, name, password} = req.body;
-            const userData = await userService.Register(email, name, password);
+            const {email, username, password} = req.body;
+            const userData = await userService.Register(email, username, password);
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
             return res.status(200).json(userData);
         }
@@ -93,8 +93,8 @@ class AuthController {
     }
     async getUserByName(req: Request, res: Response, next: NextFunction) {
         try {
-            const name = req.params.name as string;
-            const user = await userService.getUserByName(name);
+            const username = req.params.username as string;
+            const user = await userService.getUserByName(username);
             return res.status(200).json(user);
         }
         catch (e) {

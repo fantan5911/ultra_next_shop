@@ -42,7 +42,7 @@ class smartPhoneController {
 
     async addSmartphone(req: Request, res: Response, next: NextFunction) {
         try {
-            const {name, description, specifications, brandId, price} = req.body;
+            const {name, description, specifications, imageUrl, brandId, price} = req.body;
             const authorization = req.headers.authorization;
             if (!authorization) {
                 return next(ApiError.UnAuthorizedError());
@@ -54,7 +54,7 @@ class smartPhoneController {
             }
 
             const smartphone = 
-            await smartphoneService.addSmartphone(userData.id, name, description, specifications, brandId, price);
+            await smartphoneService.addSmartphone(userData.id, name, description, specifications, imageUrl, brandId, price);
 
             return res.status(200).json({message: `создан смартфон с id: ${smartphone.id}`});
         }

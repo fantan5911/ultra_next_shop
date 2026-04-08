@@ -279,8 +279,6 @@ export type SmartphoneOrderByWithRelationInput = {
 
 export type SmartphoneWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  userId?: string
-  brandId?: string
   AND?: Prisma.SmartphoneWhereInput | Prisma.SmartphoneWhereInput[]
   OR?: Prisma.SmartphoneWhereInput[]
   NOT?: Prisma.SmartphoneWhereInput | Prisma.SmartphoneWhereInput[]
@@ -289,12 +287,14 @@ export type SmartphoneWhereUniqueInput = Prisma.AtLeast<{
   specifications?: Prisma.StringFilter<"Smartphone"> | string
   price?: Prisma.FloatFilter<"Smartphone"> | number
   imageUrl?: Prisma.StringNullableFilter<"Smartphone"> | string | null
+  userId?: Prisma.StringFilter<"Smartphone"> | string
+  brandId?: Prisma.StringFilter<"Smartphone"> | string
   createdAt?: Prisma.DateTimeFilter<"Smartphone"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Smartphone"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   cart_items?: Prisma.CartItemListRelationFilter
   brand?: Prisma.XOR<Prisma.BrandScalarRelationFilter, Prisma.BrandWhereInput>
-}, "id" | "userId" | "brandId">
+}, "id">
 
 export type SmartphoneOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

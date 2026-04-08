@@ -85,12 +85,12 @@ function FormError({ error }) {
             children: error.message
         }, void 0, false, {
             fileName: "[project]/src/components/UI/FormError.tsx",
-            lineNumber: 13,
+            lineNumber: 11,
             columnNumber: 13
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/UI/FormError.tsx",
-        lineNumber: 12,
+        lineNumber: 10,
         columnNumber: 9
     }, this);
 }
@@ -196,18 +196,18 @@ __turbopack_context__.s({
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$api$2f$axios$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/api/axios.ts [app-client] (ecmascript)");
 ;
 class AuthService {
-    async Register(email, name, password) {
+    async Register(email, username, password) {
         const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$api$2f$axios$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["api"].post('/users/register', {
             email: email,
-            name: name,
+            username: username,
             password: password
         });
         return response;
     }
-    async Login(email, name, password) {
+    async Login(email, username, password) {
         const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$api$2f$axios$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["api"].post('/users/login', {
             email: email,
-            name: name,
+            username: username,
             password: password
         });
         return response;
@@ -228,7 +228,8 @@ __turbopack_context__.s({
 });
 const PAGES = {
     HOME: "/",
-    SMARTPHONE: (smartphoneId)=>`/smartphone/${smartphoneId}`
+    SMARTPHONE: (smartphoneId)=>`/smartphone/${smartphoneId}`,
+    USER: (username)=>`/user/${username}`
 };
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
@@ -265,18 +266,18 @@ var _s = __turbopack_context__.k.signature();
 function RegisterForm() {
     _s();
     const [email, setEmail] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
-    const [name, setName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
+    const [username, setUsername] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
     const [password, setPassword] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
     const formMethods = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"])({
         mode: 'onSubmit'
     });
     const onSubmit = async (data)=>{
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$service$2f$auth$2e$service$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].Register(data.email, data.name, data.password);
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$service$2f$auth$2e$service$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].Register(data.email, data.username, data.password);
         router.push(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$pages$2e$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PAGES"].HOME);
     };
     const EmailError = formMethods.formState.errors.email;
-    const NameError = formMethods.formState.errors.name;
+    const UsernameError = formMethods.formState.errors.username;
     const PasswordError = formMethods.formState.errors.password;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex items-center justify-center w-full min-h-[60vh]",
@@ -317,7 +318,7 @@ function RegisterForm() {
                     columnNumber: 32
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$UI$2f$AuthorizationInput$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AuthorizationInput"], {
-                    registerName: "name",
+                    registerName: "username",
                     formMethods: formMethods,
                     type: "text",
                     placeholder: "Введите никнейм",
@@ -326,19 +327,19 @@ function RegisterForm() {
                     minLenghtMessage: "Никнейм должен быть не менее 3 символов",
                     maxLength: 20,
                     maxLengthMessage: "Никнейм должен быть не более 20 символов",
-                    value: name,
-                    onChange: (e)=>setName(e.target.value)
+                    value: username,
+                    onChange: (e)=>setUsername(e.target.value)
                 }, void 0, false, {
                     fileName: "[project]/src/components/RegisterForm.tsx",
                     lineNumber: 59,
                     columnNumber: 17
                 }, this),
-                NameError && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$UI$2f$FormError$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FormError"], {
-                    error: NameError
+                UsernameError && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$UI$2f$FormError$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FormError"], {
+                    error: UsernameError
                 }, void 0, false, {
                     fileName: "[project]/src/components/RegisterForm.tsx",
                     lineNumber: 73,
-                    columnNumber: 31
+                    columnNumber: 35
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$UI$2f$AuthorizationInput$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AuthorizationInput"], {
                     registerName: "password",
@@ -365,7 +366,7 @@ function RegisterForm() {
                     columnNumber: 35
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$UI$2f$AuthorizationButton$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AuthorizationButton"], {
-                    children: "Регистрация"
+                    children: "Создать аккаунт"
                 }, void 0, false, {
                     fileName: "[project]/src/components/RegisterForm.tsx",
                     lineNumber: 91,
@@ -383,7 +384,7 @@ function RegisterForm() {
         columnNumber: 9
     }, this);
 }
-_s(RegisterForm, "3qr6GzSBy3zMcKd0dTSWKxN12bw=", false, function() {
+_s(RegisterForm, "Q/FGalUXqiJ4twKN8DrZF6dIC78=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"]

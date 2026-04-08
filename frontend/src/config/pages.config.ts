@@ -1,4 +1,5 @@
 export const PAGES = {
     HOME: "/",
-    SMARTPHONE: (smartphoneId: string) => `/smartphone/${smartphoneId}`
+    SMARTPHONE: (smartphoneId: string) => `/smartphone/${smartphoneId}`,
+    USER: (username: string) => `/user/${username}`,
 }

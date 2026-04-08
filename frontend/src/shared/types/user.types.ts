@@ -1,7 +1,5 @@
 export interface IUser {
-    id: string;
-    email: string;
-    name: string;
-    isActivated: boolean;
+    username: string;
+    avatarUrl: string | null;
     isBanned: boolean;
 }

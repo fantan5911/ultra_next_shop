@@ -1,7 +1,5 @@
-import { api } from "@/api/axios";
 import { API_URL } from "@/constants/api.url";
 import { ISmartphone } from "@/shared/types/smartphone.types";
-import { AxiosResponse } from "axios";
 
 
 class SmartPhoneService {
@@ -9,7 +7,7 @@ class SmartPhoneService {
     try {
         const response = await fetch(`${API_URL}/smartphones`, {
             next: {
-                revalidate: 40 // ISR кэширование
+                revalidate: 40
             }
         });
         
@@ -25,12 +23,20 @@ class SmartPhoneService {
         }
     }
 
-    async getSmartPhoneById(smartPhoneid: string) {
+    async getSmartPhoneById(smartPhoneid: string): Promise<ISmartphone> {
         const response = await fetch(`${API_URL}/smartphones/id/${smartPhoneid}`, {
             next: {
                 revalidate: 40
             }
         })
+        
+        if (!response.ok) {
+            if (response.status === 404) {
+                throw new Error('404');
+            }
+            throw new Error('Failed to fetch smartphone');
+        }
+        
         return await response.json();
     }
 }

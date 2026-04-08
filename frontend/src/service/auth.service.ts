@@ -1,21 +1,21 @@
 import { api } from "@/api/axios";
-import { AuthResponse } from "@/shared/types/auth.response";
+import { AuthResponse } from "@/shared/response/auth.response";
 import { AxiosResponse } from "axios";
 
 
 class AuthService {
-    async Register(email: string, name: string, password: string): Promise<AxiosResponse<AuthResponse>> {
+    async Register(email: string, username: string, password: string): Promise<AxiosResponse<AuthResponse>> {
         const response = await api.post<AuthResponse>('/users/register', {
             email: email,
-            name: name,
+            username: username,
             password: password
         })
         return response;
     }
-    async Login(email: string, name: string, password: string) {
+    async Login(email: string, username: string, password: string) {
         const response = await api.post<AuthResponse>('/users/login', {
             email: email,
-            name: name,
+            username: username,
             password: password
         })
         return response;

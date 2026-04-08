@@ -1,5 +1,8 @@
 {
   "/_not-found/page": "/_not-found",
+  "/(public)/404/page": "/404",
   "/(public)/(home)/page": "/",
+  "/(public)/user/[username]/page": "/user/[username]",
+  "/(public)/smartphone/[id]/page": "/smartphone/[id]",
   "/(public)/register/page": "/register"
 }

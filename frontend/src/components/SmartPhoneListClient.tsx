@@ -18,18 +18,19 @@ export function SmartPhoneListClient({smartphones}: SmartPhoneListClientProps) {
     }, [smartphones, setSmartphones]);
 
     return (
-        <>
-            {storeSmartphones.map((smartphone: ISmartphone) => (
-                <SmartPhoneCard 
-                    key={smartphone.id}
-                    id={smartphone.id}
-                    alt={smartphone.name}
-                    src="/test_iphone.png"
-                    brand={smartphone.brand}
-                    name={smartphone.name}
-                    price={smartphone.price}
-                />
+        <div className="grid grid-cols-4">
+            {storeSmartphones.map(smartphone => (
+                    <SmartPhoneCard
+                        key={smartphone.id}
+                        id={smartphone.id}
+                        alt={smartphone.name}
+                        // src={smartphone.imageUrl === null ? smartphone.name : smartphone.imageUrl}
+                        src="/test_iphone.png"
+                        brand={smartphone.brand}
+                        name={smartphone.name}
+                        price={smartphone.price}
+                    />
             ))}
-        </>
+        </div>
     );
 }
