@@ -15,12 +15,12 @@
   "headers": [],
   "dynamicRoutes": [
     {
-      "page": "/smartphone/[id]",
-      "regex": "^/smartphone/([^/]+?)(?:/)?$",
+      "page": "/smartphone/id/[id]",
+      "regex": "^/smartphone/id/([^/]+?)(?:/)?$",
       "routeKeys": {
         "nxtPid": "nxtPid"
       },
-      "namedRegex": "^/smartphone/(?<nxtPid>[^/]+?)(?:/)?$"
+      "namedRegex": "^/smartphone/id/(?<nxtPid>[^/]+?)(?:/)?$"
     },
     {
       "page": "/user/[username]",
@@ -49,6 +49,12 @@
       "regex": "^/_not\\-found(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/login",
+      "regex": "^/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/login(?:/)?$"
     },
     {
       "page": "/register",

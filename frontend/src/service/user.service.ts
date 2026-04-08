@@ -14,7 +14,7 @@ class UserService {
         if (error) {
             throw error;
         }
-        return response.json();
+        return await response.json();
     }
 }
 

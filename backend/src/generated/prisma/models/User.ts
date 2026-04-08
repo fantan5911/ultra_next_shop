@@ -33,6 +33,7 @@ export type UserMinAggregateOutputType = {
   activationLink: string | null
   isActivated: boolean | null
   isBanned: boolean | null
+  acceptedTerms: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -46,6 +47,7 @@ export type UserMaxAggregateOutputType = {
   activationLink: string | null
   isActivated: boolean | null
   isBanned: boolean | null
+  acceptedTerms: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -59,6 +61,7 @@ export type UserCountAggregateOutputType = {
   activationLink: number
   isActivated: number
   isBanned: number
+  acceptedTerms: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -74,6 +77,7 @@ export type UserMinAggregateInputType = {
   activationLink?: true
   isActivated?: true
   isBanned?: true
+  acceptedTerms?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -87,6 +91,7 @@ export type UserMaxAggregateInputType = {
   activationLink?: true
   isActivated?: true
   isBanned?: true
+  acceptedTerms?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -100,6 +105,7 @@ export type UserCountAggregateInputType = {
   activationLink?: true
   isActivated?: true
   isBanned?: true
+  acceptedTerms?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -186,6 +192,7 @@ export type UserGroupByOutputType = {
   activationLink: string
   isActivated: boolean
   isBanned: boolean
+  acceptedTerms: boolean
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -220,6 +227,7 @@ export type UserWhereInput = {
   activationLink?: Prisma.StringFilter<"User"> | string
   isActivated?: Prisma.BoolFilter<"User"> | boolean
   isBanned?: Prisma.BoolFilter<"User"> | boolean
+  acceptedTerms?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   cart?: Prisma.XOR<Prisma.CartNullableScalarRelationFilter, Prisma.CartWhereInput> | null
@@ -236,6 +244,7 @@ export type UserOrderByWithRelationInput = {
   activationLink?: Prisma.SortOrder
   isActivated?: Prisma.SortOrder
   isBanned?: Prisma.SortOrder
+  acceptedTerms?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   cart?: Prisma.CartOrderByWithRelationInput
@@ -255,6 +264,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   isActivated?: Prisma.BoolFilter<"User"> | boolean
   isBanned?: Prisma.BoolFilter<"User"> | boolean
+  acceptedTerms?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   cart?: Prisma.XOR<Prisma.CartNullableScalarRelationFilter, Prisma.CartWhereInput> | null
@@ -271,6 +281,7 @@ export type UserOrderByWithAggregationInput = {
   activationLink?: Prisma.SortOrder
   isActivated?: Prisma.SortOrder
   isBanned?: Prisma.SortOrder
+  acceptedTerms?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -290,6 +301,7 @@ export type UserScalarWhereWithAggregatesInput = {
   activationLink?: Prisma.StringWithAggregatesFilter<"User"> | string
   isActivated?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   isBanned?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  acceptedTerms?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -303,6 +315,7 @@ export type UserCreateInput = {
   activationLink?: string
   isActivated?: boolean
   isBanned?: boolean
+  acceptedTerms?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   cart?: Prisma.CartCreateNestedOneWithoutUserInput
@@ -319,6 +332,7 @@ export type UserUncheckedCreateInput = {
   activationLink?: string
   isActivated?: boolean
   isBanned?: boolean
+  acceptedTerms?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
@@ -335,6 +349,7 @@ export type UserUpdateInput = {
   activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cart?: Prisma.CartUpdateOneWithoutUserNestedInput
@@ -351,6 +366,7 @@ export type UserUncheckedUpdateInput = {
   activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
@@ -367,6 +383,7 @@ export type UserCreateManyInput = {
   activationLink?: string
   isActivated?: boolean
   isBanned?: boolean
+  acceptedTerms?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -380,6 +397,7 @@ export type UserUpdateManyMutationInput = {
   activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -393,6 +411,7 @@ export type UserUncheckedUpdateManyInput = {
   activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -411,6 +430,7 @@ export type UserCountOrderByAggregateInput = {
   activationLink?: Prisma.SortOrder
   isActivated?: Prisma.SortOrder
   isBanned?: Prisma.SortOrder
+  acceptedTerms?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -424,6 +444,7 @@ export type UserMaxOrderByAggregateInput = {
   activationLink?: Prisma.SortOrder
   isActivated?: Prisma.SortOrder
   isBanned?: Prisma.SortOrder
+  acceptedTerms?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -437,6 +458,7 @@ export type UserMinOrderByAggregateInput = {
   activationLink?: Prisma.SortOrder
   isActivated?: Prisma.SortOrder
   isBanned?: Prisma.SortOrder
+  acceptedTerms?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -496,6 +518,7 @@ export type UserCreateWithoutCartInput = {
   activationLink?: string
   isActivated?: boolean
   isBanned?: boolean
+  acceptedTerms?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   smartphones?: Prisma.SmartphoneCreateNestedManyWithoutUserInput
@@ -511,6 +534,7 @@ export type UserUncheckedCreateWithoutCartInput = {
   activationLink?: string
   isActivated?: boolean
   isBanned?: boolean
+  acceptedTerms?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   smartphones?: Prisma.SmartphoneUncheckedCreateNestedManyWithoutUserInput
@@ -542,6 +566,7 @@ export type UserUpdateWithoutCartInput = {
   activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   smartphones?: Prisma.SmartphoneUpdateManyWithoutUserNestedInput
@@ -557,6 +582,7 @@ export type UserUncheckedUpdateWithoutCartInput = {
   activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   smartphones?: Prisma.SmartphoneUncheckedUpdateManyWithoutUserNestedInput
@@ -572,6 +598,7 @@ export type UserCreateWithoutSmartphonesInput = {
   activationLink?: string
   isActivated?: boolean
   isBanned?: boolean
+  acceptedTerms?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   cart?: Prisma.CartCreateNestedOneWithoutUserInput
@@ -587,6 +614,7 @@ export type UserUncheckedCreateWithoutSmartphonesInput = {
   activationLink?: string
   isActivated?: boolean
   isBanned?: boolean
+  acceptedTerms?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
@@ -618,6 +646,7 @@ export type UserUpdateWithoutSmartphonesInput = {
   activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cart?: Prisma.CartUpdateOneWithoutUserNestedInput
@@ -633,6 +662,7 @@ export type UserUncheckedUpdateWithoutSmartphonesInput = {
   activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
@@ -648,6 +678,7 @@ export type UserCreateWithoutRefreshTokenInput = {
   activationLink?: string
   isActivated?: boolean
   isBanned?: boolean
+  acceptedTerms?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   cart?: Prisma.CartCreateNestedOneWithoutUserInput
@@ -663,6 +694,7 @@ export type UserUncheckedCreateWithoutRefreshTokenInput = {
   activationLink?: string
   isActivated?: boolean
   isBanned?: boolean
+  acceptedTerms?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
@@ -694,6 +726,7 @@ export type UserUpdateWithoutRefreshTokenInput = {
   activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cart?: Prisma.CartUpdateOneWithoutUserNestedInput
@@ -709,6 +742,7 @@ export type UserUncheckedUpdateWithoutRefreshTokenInput = {
   activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
@@ -755,6 +789,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   activationLink?: boolean
   isActivated?: boolean
   isBanned?: boolean
+  acceptedTerms?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   cart?: boolean | Prisma.User$cartArgs<ExtArgs>
@@ -772,6 +807,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   activationLink?: boolean
   isActivated?: boolean
   isBanned?: boolean
+  acceptedTerms?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -785,6 +821,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   activationLink?: boolean
   isActivated?: boolean
   isBanned?: boolean
+  acceptedTerms?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -798,11 +835,12 @@ export type UserSelectScalar = {
   activationLink?: boolean
   isActivated?: boolean
   isBanned?: boolean
+  acceptedTerms?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "username" | "avatarUrl" | "activationLink" | "isActivated" | "isBanned" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "username" | "avatarUrl" | "activationLink" | "isActivated" | "isBanned" | "acceptedTerms" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cart?: boolean | Prisma.User$cartArgs<ExtArgs>
   smartphones?: boolean | Prisma.User$smartphonesArgs<ExtArgs>
@@ -828,6 +866,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     activationLink: string
     isActivated: boolean
     isBanned: boolean
+    acceptedTerms: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1264,6 +1303,7 @@ export interface UserFieldRefs {
   readonly activationLink: Prisma.FieldRef<"User", 'String'>
   readonly isActivated: Prisma.FieldRef<"User", 'Boolean'>
   readonly isBanned: Prisma.FieldRef<"User", 'Boolean'>
+  readonly acceptedTerms: Prisma.FieldRef<"User", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }

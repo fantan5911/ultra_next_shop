@@ -10,7 +10,10 @@ import { IUser } from "../types/user.types";
 import cartService from "./cart.service";
 
 class UserService {
-    async Register(email: string, username: string, password: string) {
+    async Register(email: string, username: string, password: string, acceptedTerms: boolean) {
+        if (!acceptedTerms) {
+            throw ApiError.BadRequest('Вы должны принять условия использования');
+        }
         const searchedUser = await prisma.user.findUnique({
             where: {email}
         })
@@ -29,6 +32,7 @@ class UserService {
                 email: email,
                 password: hashPassword,
                 username: username.toLowerCase(),
+                acceptedTerms: acceptedTerms
             },
             include: {
                 smartphones: true,
@@ -50,11 +54,11 @@ class UserService {
             }
         })
         if (!user) {
-            throw ApiError.BadRequest('Неверный логин или пароль');
+            throw ApiError.BadRequest('Неверный email или пароль');
         }
         const validPassword = await argon2.verify(user.password, password);
         if (!validPassword) {
-            throw ApiError.BadRequest('Неверный логин или пароль');
+            throw ApiError.BadRequest('Неверный email или пароль');
         }
         const userDto = new UserDto(user);
         const tokens = tokenService.generateTokens({...userDto});
@@ -151,6 +155,13 @@ class UserService {
             avatarUrl: user.avatarUrl,
             isBanned: user.isBanned
         }
+    }
+    checkAuth(accessToken: string) {
+        const tokenData = tokenService.validateAccessToken(accessToken);
+        if (!tokenData) {
+            throw ApiError.UnAuthorizedError();
+        }
+        return true;
     }
 }
 

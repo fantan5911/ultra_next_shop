@@ -959,6 +959,7 @@ export const UserScalarFieldEnum = {
   activationLink: 'activationLink',
   isActivated: 'isActivated',
   isBanned: 'isBanned',
+  acceptedTerms: 'acceptedTerms',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

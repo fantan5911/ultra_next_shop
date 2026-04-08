@@ -15,8 +15,7 @@ class SmartPhoneService {
             throw new Error('Failed to fetch smartphones');
         }
         
-        const data = await response.json();
-        return data;
+        return await response.json();
     } catch (error) {
         console.error("Ошибка при загрузке смартфонов:", error);
         return [];

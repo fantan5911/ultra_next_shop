@@ -10,6 +10,7 @@ model User {
     activationLink String @unique @default(cuid())
     isActivated Boolean @default(false)
     isBanned Boolean @default(false)
+    acceptedTerms Boolean @default(false) @map("accepted_terms")
 
     cart Cart?
     smartphones Smartphone[]

@@ -1,6 +1,10 @@
-import { SmartPhoneListResponse } from "@/components/SmartPhoneListResponse";
 import { HomeLoading } from "@/components/UI/HomeLoading";
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
+
+const SmartPhoneListResponse = lazy(() => import("@/components/SmartPhoneListResponse")
+  .then(module => ({ default: module.SmartPhoneListResponse })));
+
+
 
 export const metadata = {
     title: 'Mono - интернет-магазин смартфонов',

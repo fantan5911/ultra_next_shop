@@ -7,12 +7,13 @@ export default class UserDto {
     email: string;
     isActivated: boolean;
     isBanned: boolean;
+    acceptedTerms: boolean;
 
     constructor(model: User) {
         this.id = model.id;
         this.email = model.email;
         this.isActivated = model.isActivated;
         this.isBanned = model.isBanned;
+        this.acceptedTerms = model.acceptedTerms;
     }
-    
 }

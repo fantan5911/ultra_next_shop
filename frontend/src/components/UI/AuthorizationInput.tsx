@@ -48,7 +48,7 @@ export function AuthorizationInput({
     onChange={onChange}
     className="w-full px-3 py-3.5 text-lg bg-white/5 rounded-2xl
      outline-none border border-solid border-white/20 focus:border-white/60
-     transition-colors duration-200 mt-2.5
+     transition-colors duration-200 mb-2.5
     "
     />
 }
