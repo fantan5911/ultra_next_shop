@@ -316,6 +316,10 @@
     min-height: 90%;
   }
 
+  .min-h-\[90vh\] {
+    min-height: 90vh;
+  }
+
   .min-h-\[120\%\] {
     min-height: 120%;
   }

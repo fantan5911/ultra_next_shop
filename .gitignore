@@ -17,9 +17,12 @@ access.txt
 
 # testing
 /coverage
+dist/
+/dist
 
 # next.js
-.next
+.next/
+/.next
 /out/
 
 # production

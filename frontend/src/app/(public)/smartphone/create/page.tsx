@@ -1,9 +1,6 @@
+import { useForm } from "react-hook-form"
 
 
 export default function CreateSmartphonePage() {
-    return (
-        <div>
-            
-        </div>
-    )
+    
 }

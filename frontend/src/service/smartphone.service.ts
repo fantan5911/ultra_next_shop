@@ -1,8 +1,35 @@
+import { api } from "@/api/axios";
 import { API_URL } from "@/constants/api.url";
 import { ISmartphone } from "@/shared/types/smartphone.types";
 
 
 class SmartPhoneService {
+    async addSmartphone
+    (name: string,
+    description: string,
+    specifications: string, 
+    price: number, 
+    imageUrl: string,
+    brand: string
+    ) {
+        try {
+            const response = await api.post('/smartphones/add', {
+                name: name,
+                description: description,
+                specifications: specifications,
+                price: price,
+                imageUrl: imageUrl,
+                brand: brand
+            });
+            if (response?.status === 200) {
+                return response;
+            }
+        }
+        catch (error: any) {
+            return error.response;
+        }
+    }
+
     async getSmartphones(): Promise<ISmartphone[]> {
     try {
         const response = await fetch(`${API_URL}/smartphones`, {
