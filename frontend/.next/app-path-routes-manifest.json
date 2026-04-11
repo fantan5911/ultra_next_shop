@@ -1,9 +1,0 @@
-{
-  "/_not-found/page": "/_not-found",
-  "/(public)/404/page": "/404",
-  "/(public)/smartphone/id/[id]/page": "/smartphone/id/[id]",
-  "/(public)/user/[username]/page": "/user/[username]",
-  "/(public)/(authorization)/register/page": "/register",
-  "/(public)/(authorization)/login/page": "/login",
-  "/(public)/(home)/page": "/"
-}
