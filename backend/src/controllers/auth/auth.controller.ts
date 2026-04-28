@@ -10,7 +10,12 @@ class AuthController {
         try {
             const {email, username, password, acceptedTerms} = req.body;
             const userData = await userService.Register(email, username, password, acceptedTerms);
-            res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
+            res.cookie('refreshToken', userData.refreshToken, {
+                maxAge: 30 * 24 * 60 * 60 * 1000,
+                httpOnly: true,
+                sameSite: 'none',
+                secure: false,
+            });
             console.log("Пользователь зарегистрирован:", userData);
             return res.status(200).json(userData);
         }
@@ -22,7 +27,12 @@ class AuthController {
         try {
             const {email, password} = req.body;
             const userData = await userService.Login(email, password);
-            res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
+            res.cookie('refreshToken', userData.refreshToken, {
+                maxAge: 30 * 24 * 60 * 60 * 1000,
+                httpOnly: true,
+                sameSite: 'none',
+                secure: false,
+            });
             console.log("Пользователь вошел:", userData);
             return res.status(200).json(userData);
         }
@@ -47,7 +57,12 @@ class AuthController {
         try {
             const {refreshToken} = req.cookies;
             const userData = await userService.refresh(refreshToken);
-            res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
+            res.cookie('refreshToken', userData.refreshToken, {
+                maxAge: 30 * 24 * 60 * 60 * 1000,
+                httpOnly: true,
+                sameSite: 'none',
+                secure: false,
+            });
             return res.json(userData);
         }
         catch (e) {

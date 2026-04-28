@@ -95,7 +95,7 @@ class SmartPhoneService {
     }
 
     async addSmartphone
-    (userId: string, name: string, description: string, specifications: string, imageUrl: string, brandId: string, price: number) {
+    (userId: string, name: string, description: string, specifications: string, imageUrl: string, brandId: string, price: number | string) {
         const searchedUser = await prisma.user.findUnique({
             where: {id: userId}
         });
@@ -108,6 +108,10 @@ class SmartPhoneService {
         if (!searchedBrand) {
             throw ApiError.BadRequest("Нет данного бренда");
         }
+        const parsedPrice = Number(price);
+        if (Number.isNaN(parsedPrice)) {
+            throw ApiError.BadRequest("Цена должна быть числом");
+        }
         const smartphone = await prisma.smartphone.create({
         data: {
             userId: userId,
@@ -116,7 +120,7 @@ class SmartPhoneService {
             specifications: specifications,
             imageUrl: imageUrl,
             brandId: brandId,
-            price: price
+            price: parsedPrice
         },
         select: {
             id: true,

@@ -11,7 +11,10 @@ export const api = axios.create({
 })
 
 api.interceptors.request.use(config => {
-    config.headers.Authorization = `Bearer ${Cookies.get('accessToken')}`;
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
 })
 
@@ -19,16 +22,22 @@ api.interceptors.response.use(config => {
     return config;
 }, async error => {
     const originalRequest = error.config;
-    if (error.response?.status === 401 && error.config && !error.config._isRetry) {
+    if (!originalRequest) {
+        return Promise.reject(error);
+    }
+
+    const isRefreshRequest = originalRequest.url?.includes('/users/refresh');
+    if (error.response?.status === 401 && !originalRequest._isRetry && !isRefreshRequest) {
         originalRequest._isRetry = true;
         try {
-            const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {withCredentials: true});
-            Cookies.set('accessToken', response.data.accessToken);
+            const response = await axios.get<AuthResponse>(`${API_URL}/users/refresh`, {withCredentials: true});
+            localStorage.setItem('accessToken', response.data.accessToken);
             return api.request(originalRequest);
         }
         catch (e) {
             console.log('НЕ АВТОРИЗОВАН', e);
         }
-        throw error;
     }
+
+    return Promise.reject(error);
 })

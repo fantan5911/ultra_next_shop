@@ -10,7 +10,7 @@ class SmartPhoneService {
     specifications: string, 
     price: number, 
     imageUrl: string,
-    brand: string
+    brandId: string
     ) {
         try {
             const response = await api.post('/smartphones/add', {
@@ -19,7 +19,7 @@ class SmartPhoneService {
                 specifications: specifications,
                 price: price,
                 imageUrl: imageUrl,
-                brand: brand
+                brandId: brandId
             });
             if (response?.status === 200) {
                 return response;

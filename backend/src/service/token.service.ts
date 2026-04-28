@@ -51,7 +51,7 @@ class TokenService {
 
     async removeToken(refreshToken: string) {
         const token = await prisma.token.delete({
-            where: {refreshToken: refreshToken}
+            where: {refreshToken: refreshToken} 
         })
         return token;
     }

@@ -2,7 +2,6 @@
 
 import Cookies from "js-cookie";
 import { api } from "@/api/axios";
-import { API_URL } from "@/constants/api.url";
 import { AuthResponse } from "@/shared/response/auth.response";
 import axios, { AxiosResponse } from "axios";
 
@@ -10,7 +9,7 @@ import axios, { AxiosResponse } from "axios";
 class AuthService {
     async Register(email: string, username: string, password: string, acceptedTerms: boolean): Promise<AxiosResponse<AuthResponse | undefined> | void> {
         try {
-            const response = await axios.post<AuthResponse>(`${API_URL}/users/register`, {
+            const response = await api.post<AuthResponse>(`/users/register`, {
                 email: email,
                 username: username,
                 password: password,
@@ -18,6 +17,7 @@ class AuthService {
             })
             console.log(response);
             if (response.status == 200 && response?.data.accessToken) {
+                localStorage.setItem('accessToken', response.data.accessToken);
                 Cookies.set('accessToken', response?.data.accessToken);
                 Cookies.set('auth', 'true');
             }
@@ -32,12 +32,13 @@ class AuthService {
     }
     async Login(email: string, password: string) {
         try {
-            const response = await axios.post<AuthResponse>(`${API_URL}/users/login`, {
+            const response = await api.post<AuthResponse>(`/users/login`, {
                 email: email,
                 password: password
             }) 
             console.log(response);
             if (response.status === 200 && response?.data.accessToken) {
+                localStorage.setItem('accessToken', response.data.accessToken);
                 Cookies.set('accessToken', response?.data.accessToken);
                 Cookies.set('auth', 'true');
             }

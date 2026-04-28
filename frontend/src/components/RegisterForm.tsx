@@ -1,7 +1,7 @@
 'use client'
 
-import { AuthorizationButton } from "@/components/UI/AuthorizationButton";
-import { AuthorizationInput } from "@/components/UI/AuthorizationInput";
+import { SubmitButton } from "@/components/UI/SubmitButton";
+import { CustomInput } from "@/components/UI/CustomInput";
 import { FormError } from "@/components/UI/FormError";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
@@ -64,7 +64,7 @@ export function RegisterForm() {
             <form onSubmit={formMethods.handleSubmit(onSubmit)}
              className="flex w-[28%] min-h-[120%] flex-col items-center gap-2 px-9 py-20">
                 <h1 className="text-5xl font-black uppercase mb-10 tracking-tighter text-center">Регистрация</h1>
-                <AuthorizationInput
+                <CustomInput
                 registerName="email"
                 formMethods={formMethods}
                 type="email"
@@ -83,7 +83,7 @@ export function RegisterForm() {
                 
                 {EmailError && <FormError error={EmailError} />}
 
-                <AuthorizationInput
+                <CustomInput
                 registerName="username"
                 formMethods={formMethods}
                 type="text"
@@ -102,7 +102,7 @@ export function RegisterForm() {
 
                 {UsernameError && <FormError error={UsernameError} />}
 
-                <AuthorizationInput
+                <CustomInput
                 registerName="password"
                 formMethods={formMethods}
                 type="password"
@@ -130,9 +130,9 @@ export function RegisterForm() {
                 registerName="acceptedTerms"
                 />
                 
-                <AuthorizationButton>
+                <SubmitButton>
                     Создать аккаунт
-                </AuthorizationButton>
+                </SubmitButton>
                 <Auth text="Уже есть аккаунт?" link={PAGES.LOGIN} />
 
             </form>

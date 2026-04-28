@@ -20,6 +20,8 @@ access.txt
 dist/
 /dist
 
+migrations/
+
 # next.js
 .next/
 /.next

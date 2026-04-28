@@ -1,12 +1,12 @@
 'use client'
 import { SubmitHandler, useForm } from "react-hook-form";
-import { AuthorizationInput } from "./UI/AuthorizationInput";
+import { CustomInput } from "./UI/CustomInput";
 import { FormError } from "./UI/FormError";
 import { useState } from "react";
 import authService from "@/service/auth.service";
 import { useRouter } from "next/navigation";
 import { PAGES } from "@/config/pages.config";
-import { AuthorizationButton } from "./UI/AuthorizationButton";
+import { SubmitButton } from "./UI/SubmitButton";
 import { useAuthStore } from "@/store/auth.store";
 import { Auth } from "./UI/Auth";
 
@@ -44,9 +44,10 @@ export function LoginForm() {
 
     return (
         <div className="flex items-center justify-center w-full min-h-[75vh]">
-            <form onSubmit={formMethods.handleSubmit(onSubmit)} className="flex w-[28%] min-h-[120%] flex-col items-center gap-2 px-9 py-20">
+            <form onSubmit={formMethods.handleSubmit(onSubmit)} className="
+            flex w-[28%] min-h-[120%] flex-col items-center gap-2 px-9 py-20">
                 <h1 className="text-5xl font-black uppercase mb-10 tracking-tighter text-center">Вход</h1>
-                <AuthorizationInput
+                <CustomInput
                 registerName="email"
                 formMethods={formMethods}
                 type="email"
@@ -64,7 +65,7 @@ export function LoginForm() {
                 />                
                 {EmailError && <FormError error={EmailError} />}
 
-                <AuthorizationInput
+                <CustomInput
                 registerName="password"
                 formMethods={formMethods}
                 type="password"
@@ -83,9 +84,9 @@ export function LoginForm() {
                 {PasswordError && <FormError error={PasswordError} />}
                 {authError && <FormError error={authError} />}
                 
-                <AuthorizationButton>
+                <SubmitButton>
                     Войти
-                </AuthorizationButton>
+                </SubmitButton>
                 <Auth text="Еще нет аккаунта?" link={PAGES.REGISTER} />
             </form>
         </div>
