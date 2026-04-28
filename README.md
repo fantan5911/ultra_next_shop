@@ -52,4 +52,4 @@ bun dev
 ## 
 
 ## Демо
-[ссылка на видео-демо]
+https://disk.yandex.ru/i/EbWDEAkRLROJ8g
