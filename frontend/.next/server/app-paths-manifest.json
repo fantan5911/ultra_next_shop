@@ -1,9 +1,0 @@
-{
-  "/(public)/(authorization)/login/page": "app/(public)/(authorization)/login/page.js",
-  "/(public)/(authorization)/register/page": "app/(public)/(authorization)/register/page.js",
-  "/(public)/(home)/page": "app/(public)/(home)/page.js",
-  "/(public)/smartphone/create/page": "app/(public)/smartphone/create/page.js",
-  "/(public)/smartphone/id/[id]/page": "app/(public)/smartphone/id/[id]/page.js",
-  "/(public)/user/[username]/page": "app/(public)/user/[username]/page.js",
-  "/_not-found/page": "app/_not-found/page.js"
-}
