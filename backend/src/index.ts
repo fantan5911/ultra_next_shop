@@ -1,8 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import { ENV } from './env';
-import dotenv from 'dotenv';
+import { ENV } from './env.js';
 import { PrismaClient } from './generated/prisma/client';
 import pg from 'pg';
 import { PrismaPg } from '@prisma/adapter-pg';
