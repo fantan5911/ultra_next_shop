@@ -19,7 +19,14 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: ["http://localhost", "http://localhost:3000", "http://localhost:2000", "http://localhost:4173"],
+    origin: [
+        "http://localhost",
+        "http://localhost:3000",
+        "http://localhost:2000",
+        "http://localhost:4173",
+        "https://ultra_next_frontend.vercel.app",
+        "https://ultra_next_admin.vercel.app"
+    ],
     credentials: true
 }));
 app.use(cookieParser());
