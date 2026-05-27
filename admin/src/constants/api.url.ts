@@ -1,1 +1,1 @@
-export const API_URL = "https://ultra_next_backend.vercel.app/api";
+export const API_URL = "https://ultra-next-backend.vercel.app/api";
