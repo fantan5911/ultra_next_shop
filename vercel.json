@@ -7,11 +7,15 @@
         },
         "backend": {
             "root": "backend",
-            "routePrefix": "/api"
+            "routePrefix": "/_/backend"
         },
         "admin": {
             "root": "admin",
-            "routePrefix": "/admin"
+            "routePrefix": "/admin",
+            "buildCommand": "npm run build",
+            "outputDirectory": "dist",
+            "devCommand": "npm run dev",
+            "installCommand": "npm install"
         }
     }
 }
