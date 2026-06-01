@@ -39,6 +39,7 @@ class SmartPhoneService {
                 revalidate: 40
             }
         });
+        // await new Promise(resolve => setTimeout(resolve, 100));
         
         if (!response.ok) {
             throw new Error('Failed to fetch smartphones');
@@ -57,6 +58,7 @@ class SmartPhoneService {
                 revalidate: 40
             }
         })
+        // await new Promise(resolve => setTimeout(resolve, 100));
         
         if (!response.ok) {
             if (response.status === 404) {

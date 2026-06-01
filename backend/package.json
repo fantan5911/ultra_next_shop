@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "bun run --watch src/index.ts",
-    "b": "npx prisma generate && tsx build ./src/index.ts --outdir ./dist",
+    "build": "bun build ./src/index.ts --outdir ./dist --target node",
     "prod": "bun run dist/index.js"
   },
   "dependencies": {

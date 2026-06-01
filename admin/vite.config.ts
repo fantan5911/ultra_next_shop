@@ -14,4 +14,8 @@ export default defineConfig({
     },
     manifest: manifest
   })],
+  server: {
+    port: 2000,
+    host: true,
+  },
 })

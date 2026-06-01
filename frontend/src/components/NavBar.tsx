@@ -88,8 +88,8 @@ export function NavBar() {
             ) : (
               <Link
                 href={PAGES.LOGIN}
-                className="px-4 md:px-5 py-2 text-sm text-black bg-white rounded-3xl
-                hover:bg-gray-200 transition-colors duration-150 whitespace-nowrap"
+                className="px-4 md:px-5 py-2 text-sm border border-white text-black bg-white rounded-3xl
+                hover:bg-black hover:border-white hover:text-white transition-colors duration-150 whitespace-nowrap"
               >
                 Войти
               </Link>

@@ -1,8 +1,8 @@
 import type { FC } from "react";
 
-interface Props {
+// interface Props {
 
-}
+// }
 
 const AdminUserCard: FC = () => {
     return (
