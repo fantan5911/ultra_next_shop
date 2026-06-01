@@ -24,7 +24,9 @@ app.use(cors({
         "http://localhost:2000",
         "http://localhost:4173",
         "https://ultra_next_frontend.vercel.app",
-        "https://ultra_next_admin.vercel.app"
+        "https://ultra_next_admin.vercel.app",
+        "http://186.246.29.122:3000",
+        "http://186.246.29.122:2000"
     ],
     credentials: true
 }));
