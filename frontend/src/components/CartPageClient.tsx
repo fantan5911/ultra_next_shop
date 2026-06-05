@@ -30,15 +30,16 @@ export function CartPageClient() {
 
     return (
         <div className="flex justify-center w-full min-h-[90vh]">
-            <div className="w-[78%] mt-8">
+            <div className="flex flex-col w-[95%] lg:w-[78%] mt-8">
                 <h1 className="text-4xl font-bold mb-4 uppercase">корзина</h1>
-                        {!cartItems.length && loading ? (
+                    <div className="flex sm:flex-col lg:flex-row gap-6 w-full h-full">
+                        {!cartItems.length || loading ? (
                             <div className="flex flex-col items-center justify-center w-full min-h-[70vh] gap-6">
-                                <p className="text-2xl font-bold">Ваша корзина пуста</p>
+                                <p className="text-3xl font-bold">Ваша корзина пуста</p>
                             </div>
                         ) : (
-                            <div className="flex gap-20 h-full w-full">
-                        <div className="flex flex-col w-[65%] gap-4">
+                        <div className="flex flex-col md:flex-row lg:flex-row gap-20 h-full w-full">
+                        <div className="flex flex-col md:w-[80%] lg:w-[65%] gap-4">
                             {cartItems.map((cartItem) => (
                                 <CartItemCard
                                     key={cartItem.id}
@@ -46,7 +47,8 @@ export function CartPageClient() {
                                 />
                             ))}
                         </div>
-                        <div className="px-5 py-5 w-[25%] bg-white/5 h-[20%]
+                        
+                        <div className="px-5 py-5 sm:flex sm:w-full md:w-[40%] lg:w-[25%] bg-white/5 h-[20%]
                         rounded-2xl flex flex-col gap-5">
                             {cartItems.length > 0 && (
                                 <p className="mt-4 text-lg font-semibold">
@@ -62,6 +64,7 @@ export function CartPageClient() {
                         </div>
                     </div>
                     )}
+                    </div>
             </div>
         </div>
     )

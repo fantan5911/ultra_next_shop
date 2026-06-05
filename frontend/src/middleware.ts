@@ -5,16 +5,16 @@ export async function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
     const token = request.cookies.get('accessToken')?.value;
     
-    const isProtectedRoute = AuthorizedPages.includes(pathname);
-    const isAuthRoute = pathname === PAGES.LOGIN || pathname === PAGES.REGISTER;
+    // const isProtectedRoute = AuthorizedPages.includes(pathname);
+    // const isAuthRoute = pathname === PAGES.LOGIN || pathname === PAGES.REGISTER;
 
-    if (token && isAuthRoute) {
-        return NextResponse.redirect(new URL(PAGES.HOME, request.url));
-    }
+    // if (token && isAuthRoute) {
+    //     return NextResponse.redirect(new URL(PAGES.HOME, request.url));
+    // }
     
-    if (isProtectedRoute && !token) {
-        return NextResponse.redirect(new URL(PAGES.LOGIN, request.url));
-    }
+    // if (isProtectedRoute && !token) {
+    //     return NextResponse.redirect(new URL(PAGES.LOGIN, request.url));
+    // }
     
     return NextResponse.next();
 }

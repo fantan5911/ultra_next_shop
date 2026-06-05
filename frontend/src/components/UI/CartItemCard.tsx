@@ -4,6 +4,7 @@ import { PAGES } from "@/config/pages.config";
 import cart_itemService from "@/service/cart_item.service";
 import { ICartItem } from "@/shared/types/cart_item.types";
 import { useCartItemStore } from "@/store/cart_item.store";
+import { Trash2Icon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -24,7 +25,7 @@ export function CartItemCard({ cartItem }: Props) {
     }
 
     return (
-        <div className="flex justify-between w-full h-[15%] bg-white/5
+        <div className="flex justify-between w-full lg:h-[15%] bg-white/5
         rounded-xl p-4 border border-white/10
         ">
             <div className="flex items-center gap-4 hover:text-underline transition-colors duration-300">
@@ -48,13 +49,13 @@ export function CartItemCard({ cartItem }: Props) {
                 </div>
                 </div>
             </div>
-            <div className="flex flex-col items-center justify-center gap-4">
+            <div className="flex flex-col items-end justify-center gap-4">
                 <p className="text-lg font-bold">{cartItem.price} ₽</p>
                 <button className="text-sm text-white/50
                  hover:text-white hover:cursor-pointer transition-colors duration-100"
                  onClick={() => deleteItem(cartItem.id)}
                 >
-                    Удалить
+                    <Trash2Icon width={20} height={20} />
                 </button>
             </div>
         </div>
