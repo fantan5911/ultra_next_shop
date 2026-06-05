@@ -97,10 +97,8 @@ export function CreateSmartphoneForm() {
                     placeholder="Введите цену"
                     value={price}
                     onChange={e => {
-                        if (Number(e.target.value)) {
-                            setPrice(0)
-                        }
-                        setPrice(Number(e.target.value))
+                        const parsedPrice = parseInt(e.target.value);
+                        setPrice(Math.max(0, parsedPrice));
                     }}
                     registerName="price"
                     required="Обязательное поле"

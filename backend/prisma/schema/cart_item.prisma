@@ -5,6 +5,7 @@ model CartItem {
 
     cartId String @map("cart_id")
     cart Cart @relation(fields: [cartId], references: [id], onDelete: Cascade)
+    price Int
 
 
     smartphoneId String @map("smartphone_id")

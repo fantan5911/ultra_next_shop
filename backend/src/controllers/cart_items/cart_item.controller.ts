@@ -46,6 +46,17 @@ class cartItemController {
             next(e);
         }
     }
+
+    async deleteCartItem(req: Request, res: Response, next: NextFunction) {
+        try {
+            const cartItemId = req.params.cartItemId as string;
+            await cart_itemService.deleteCartItem(cartItemId);
+            return res.status(200).json({message: "Товар успешно удален из корзины"});
+        }
+        catch (e) {
+            next(e);
+        }
+    }
 }
 
 export default new cartItemController();

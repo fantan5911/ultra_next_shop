@@ -13,6 +13,7 @@ class cartItemService {
         const smartphone = await prisma.smartphone.findUnique({
             where: {id: smartphoneId}
         })
+        console.log(smartphone);
         if (!smartphone) {
             throw ApiError.NotFound("Не найден смартфон с данным id");
         }
@@ -30,6 +31,7 @@ class cartItemService {
         const cart_item = await prisma.cartItem.create({
             data: {
                 name: smartphone.name,
+                price: smartphone.price,
                 cartId: cartId,
                 smartphoneId: smartphoneId,
                 count: 1
@@ -53,6 +55,18 @@ class cartItemService {
             }
         })
         return cart_item;
+    }
+    
+    async deleteCartItem(cartItemId: string) {
+        const cart_item = await prisma.cartItem.findUnique({
+            where: {id: cartItemId}
+        })
+        if (!cart_item) {
+            throw ApiError.NotFound("Не найден элемент корзины с данным id");
+        }
+        await prisma.cartItem.delete({
+            where: {id: cartItemId}
+        })
     }
 }
 
