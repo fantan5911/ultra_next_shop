@@ -1,7 +1,10 @@
-import { CreateSmartphoneForm } from "@/components/CreateSmartphoneForm"
-import { useForm } from "react-hook-form"
+import { CreateSmartphoneForm } from "@/components/CreateSmartphoneForm";
 
+export const metadata = {
+  title: "Публикация смартфона",
+  description: "Страница создания смартфона",
+};
 
 export default function CreateSmartphonePage() {
-    return <CreateSmartphoneForm />
+  return <CreateSmartphoneForm />;
 }

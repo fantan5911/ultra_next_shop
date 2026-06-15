@@ -21,12 +21,12 @@ export function NavBar() {
       setIsAuth(false);
       router.push(PAGES.HOME);
     }
-  }
+  };
 
   useEffect(() => {
     setMounted(true);
     async function checkAuth() {
-      const response = await authService.checkAuth() as boolean;
+      const response = (await authService.checkAuth()) as boolean;
       setIsAuth(!!response);
     }
     checkAuth();
@@ -45,7 +45,7 @@ export function NavBar() {
               href={PAGES.HOME}
               className="text-xl sm:text-2xl font-extrabold text-white whitespace-nowrap"
             >
-              MONO.
+              MONO
             </Link>
           </div>
 
@@ -60,7 +60,9 @@ export function NavBar() {
               <Link
                 href={PAGES.LOGIN}
                 className="px-4 md:px-5 py-2 text-sm text-black bg-white rounded-3xl
-                hover:bg-gray-200 transition-colors duration-150 whitespace-nowrap"
+                hover:bg-gray-200
+                 transition-colors duration-150 whitespace-nowrap
+                "
               >
                 Войти
               </Link>
@@ -82,7 +84,10 @@ export function NavBar() {
                   <ShoppingCart size={22} strokeWidth={2} />
                 </Link>
                 <button className="cursor-pointer" onClick={Logout}>
-                  <LogOut className="text-white hover:text-white/70" size={20} />
+                  <LogOut
+                    className="text-white hover:text-white/70"
+                    size={20}
+                  />
                 </button>
               </>
             ) : (
@@ -96,8 +101,7 @@ export function NavBar() {
             )}
           </div>
 
-          <div className="flex sm:hidden">
-          </div>
+          <div className="flex sm:hidden"></div>
         </div>
       </header>
 
@@ -110,12 +114,22 @@ export function NavBar() {
               href={PAGES.HOME}
               className="flex flex-col items-center gap-1 text-white py-2 px-3"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                />
               </svg>
               <span className="text-[10px]">Главная</span>
             </Link>
-            
+
             <button
               onClick={handleSearchClick}
               className="flex flex-col items-center gap-1 text-white py-2 px-3"
@@ -123,7 +137,7 @@ export function NavBar() {
               <Search size={20} strokeWidth={2} />
               <span className="text-[10px]">Поиск</span>
             </button>
-            
+
             <Link
               href={PAGES.SMARTPHONE_CREATE}
               className="flex flex-col items-center gap-1 text-white py-2 px-3"
@@ -131,7 +145,7 @@ export function NavBar() {
               <Plus size={20} strokeWidth={2} />
               <span className="text-[10px]">Создать</span>
             </Link>
-            
+
             <Link
               href={PAGES.CART}
               className="flex flex-col items-center gap-1 text-white py-2 px-3"
@@ -139,7 +153,7 @@ export function NavBar() {
               <ShoppingCart size={20} strokeWidth={2} />
               <span className="text-[10px]">Корзина</span>
             </Link>
-            
+
             <button
               onClick={Logout}
               className="flex flex-col items-center gap-1 text-white py-2 px-3"

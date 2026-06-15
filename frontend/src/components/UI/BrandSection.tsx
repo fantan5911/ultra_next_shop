@@ -40,6 +40,7 @@ export function BrandSection({
         onClick={() => setOpen((v) => !v)}
         className="w-full px-3 py-3.5 text-lg bg-white/5 rounded-2xl
         outline-none border border-solid border-white/20 hover:border-white/60 cursor-pointer
+        hover:shadow-md hover:shadow-white/20
         transition-colors duration-200 mb-2.5"
       >
         {selectedBrandName || "Выберите бренд"}

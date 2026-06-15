@@ -17,15 +17,20 @@ export function AddToCart({smartphoneId, price}: Props) {
     const isAuth = useAuthStore(state => state.isAuth);
     const setIsAuth = useAuthStore(state => state.setIsAuth);
     const [inCart, setInCart] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
-        if (!isAuth) return;
+        setLoading(true)
+        if (!isAuth) {
+            return;
+        };
 
         const checkItemInCart = async () => {
             const response = await cart_itemService.getCartItemBySmartphoneId(smartphoneId);
             if (response) {
                 setInCart(true);
             }
+            setLoading(false);
         }
         checkItemInCart();
     }, [smartphoneId, isAuth])
@@ -50,12 +55,18 @@ export function AddToCart({smartphoneId, price}: Props) {
             {inCart ? (
                 <Check color="white" size={32} />
             ) : (
-            <button className="text-sm text-black font-semibold px-7 py-2 uppercase
-             bg-white rounded-2xl cursor-pointer hover:bg-white/90 transition-colors duration-200"
-             onClick={addItemToCart}
-             >
-                В КОРЗИНУ
-            </button>
+            <>
+            {loading ? (
+                <></>
+             ) : (
+                <button className="text-sm text-black font-semibold px-7 py-2 uppercase
+                bg-white rounded-2xl cursor-pointer hover:bg-white/90 transition-colors duration-200"
+                onClick={addItemToCart}
+                >
+                    В КОРЗИНУ
+                </button>
+             )}
+            </>
             )}
         </div>
     )

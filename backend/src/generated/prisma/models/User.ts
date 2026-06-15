@@ -30,8 +30,8 @@ export type UserMinAggregateOutputType = {
   password: string | null
   username: string | null
   avatarUrl: string | null
-  activationLink: string | null
   isActivated: boolean | null
+  activationLink: string | null
   isBanned: boolean | null
   acceptedTerms: boolean | null
   createdAt: Date | null
@@ -44,8 +44,8 @@ export type UserMaxAggregateOutputType = {
   password: string | null
   username: string | null
   avatarUrl: string | null
-  activationLink: string | null
   isActivated: boolean | null
+  activationLink: string | null
   isBanned: boolean | null
   acceptedTerms: boolean | null
   createdAt: Date | null
@@ -58,8 +58,8 @@ export type UserCountAggregateOutputType = {
   password: number
   username: number
   avatarUrl: number
-  activationLink: number
   isActivated: number
+  activationLink: number
   isBanned: number
   acceptedTerms: number
   createdAt: number
@@ -74,8 +74,8 @@ export type UserMinAggregateInputType = {
   password?: true
   username?: true
   avatarUrl?: true
-  activationLink?: true
   isActivated?: true
+  activationLink?: true
   isBanned?: true
   acceptedTerms?: true
   createdAt?: true
@@ -88,8 +88,8 @@ export type UserMaxAggregateInputType = {
   password?: true
   username?: true
   avatarUrl?: true
-  activationLink?: true
   isActivated?: true
+  activationLink?: true
   isBanned?: true
   acceptedTerms?: true
   createdAt?: true
@@ -102,8 +102,8 @@ export type UserCountAggregateInputType = {
   password?: true
   username?: true
   avatarUrl?: true
-  activationLink?: true
   isActivated?: true
+  activationLink?: true
   isBanned?: true
   acceptedTerms?: true
   createdAt?: true
@@ -189,8 +189,8 @@ export type UserGroupByOutputType = {
   password: string
   username: string
   avatarUrl: string | null
-  activationLink: string
   isActivated: boolean
+  activationLink: string
   isBanned: boolean
   acceptedTerms: boolean
   createdAt: Date
@@ -224,8 +224,8 @@ export type UserWhereInput = {
   password?: Prisma.StringFilter<"User"> | string
   username?: Prisma.StringFilter<"User"> | string
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
-  activationLink?: Prisma.StringFilter<"User"> | string
   isActivated?: Prisma.BoolFilter<"User"> | boolean
+  activationLink?: Prisma.StringFilter<"User"> | string
   isBanned?: Prisma.BoolFilter<"User"> | boolean
   acceptedTerms?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -241,8 +241,8 @@ export type UserOrderByWithRelationInput = {
   password?: Prisma.SortOrder
   username?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  activationLink?: Prisma.SortOrder
   isActivated?: Prisma.SortOrder
+  activationLink?: Prisma.SortOrder
   isBanned?: Prisma.SortOrder
   acceptedTerms?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -278,8 +278,8 @@ export type UserOrderByWithAggregationInput = {
   password?: Prisma.SortOrder
   username?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  activationLink?: Prisma.SortOrder
   isActivated?: Prisma.SortOrder
+  activationLink?: Prisma.SortOrder
   isBanned?: Prisma.SortOrder
   acceptedTerms?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -298,8 +298,8 @@ export type UserScalarWhereWithAggregatesInput = {
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
   username?: Prisma.StringWithAggregatesFilter<"User"> | string
   avatarUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  activationLink?: Prisma.StringWithAggregatesFilter<"User"> | string
   isActivated?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  activationLink?: Prisma.StringWithAggregatesFilter<"User"> | string
   isBanned?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   acceptedTerms?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -312,8 +312,8 @@ export type UserCreateInput = {
   password: string
   username: string
   avatarUrl?: string | null
-  activationLink?: string
   isActivated?: boolean
+  activationLink: string
   isBanned?: boolean
   acceptedTerms?: boolean
   createdAt?: Date | string
@@ -329,8 +329,8 @@ export type UserUncheckedCreateInput = {
   password: string
   username: string
   avatarUrl?: string | null
-  activationLink?: string
   isActivated?: boolean
+  activationLink: string
   isBanned?: boolean
   acceptedTerms?: boolean
   createdAt?: Date | string
@@ -346,8 +346,8 @@ export type UserUpdateInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -363,8 +363,8 @@ export type UserUncheckedUpdateInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -380,8 +380,8 @@ export type UserCreateManyInput = {
   password: string
   username: string
   avatarUrl?: string | null
-  activationLink?: string
   isActivated?: boolean
+  activationLink: string
   isBanned?: boolean
   acceptedTerms?: boolean
   createdAt?: Date | string
@@ -394,8 +394,8 @@ export type UserUpdateManyMutationInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -408,8 +408,8 @@ export type UserUncheckedUpdateManyInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -427,8 +427,8 @@ export type UserCountOrderByAggregateInput = {
   password?: Prisma.SortOrder
   username?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
-  activationLink?: Prisma.SortOrder
   isActivated?: Prisma.SortOrder
+  activationLink?: Prisma.SortOrder
   isBanned?: Prisma.SortOrder
   acceptedTerms?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -441,8 +441,8 @@ export type UserMaxOrderByAggregateInput = {
   password?: Prisma.SortOrder
   username?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
-  activationLink?: Prisma.SortOrder
   isActivated?: Prisma.SortOrder
+  activationLink?: Prisma.SortOrder
   isBanned?: Prisma.SortOrder
   acceptedTerms?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -455,8 +455,8 @@ export type UserMinOrderByAggregateInput = {
   password?: Prisma.SortOrder
   username?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
-  activationLink?: Prisma.SortOrder
   isActivated?: Prisma.SortOrder
+  activationLink?: Prisma.SortOrder
   isBanned?: Prisma.SortOrder
   acceptedTerms?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -515,8 +515,8 @@ export type UserCreateWithoutCartInput = {
   password: string
   username: string
   avatarUrl?: string | null
-  activationLink?: string
   isActivated?: boolean
+  activationLink: string
   isBanned?: boolean
   acceptedTerms?: boolean
   createdAt?: Date | string
@@ -531,8 +531,8 @@ export type UserUncheckedCreateWithoutCartInput = {
   password: string
   username: string
   avatarUrl?: string | null
-  activationLink?: string
   isActivated?: boolean
+  activationLink: string
   isBanned?: boolean
   acceptedTerms?: boolean
   createdAt?: Date | string
@@ -563,8 +563,8 @@ export type UserUpdateWithoutCartInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -579,8 +579,8 @@ export type UserUncheckedUpdateWithoutCartInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -595,8 +595,8 @@ export type UserCreateWithoutSmartphonesInput = {
   password: string
   username: string
   avatarUrl?: string | null
-  activationLink?: string
   isActivated?: boolean
+  activationLink: string
   isBanned?: boolean
   acceptedTerms?: boolean
   createdAt?: Date | string
@@ -611,8 +611,8 @@ export type UserUncheckedCreateWithoutSmartphonesInput = {
   password: string
   username: string
   avatarUrl?: string | null
-  activationLink?: string
   isActivated?: boolean
+  activationLink: string
   isBanned?: boolean
   acceptedTerms?: boolean
   createdAt?: Date | string
@@ -643,8 +643,8 @@ export type UserUpdateWithoutSmartphonesInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -659,8 +659,8 @@ export type UserUncheckedUpdateWithoutSmartphonesInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -675,8 +675,8 @@ export type UserCreateWithoutRefreshTokenInput = {
   password: string
   username: string
   avatarUrl?: string | null
-  activationLink?: string
   isActivated?: boolean
+  activationLink: string
   isBanned?: boolean
   acceptedTerms?: boolean
   createdAt?: Date | string
@@ -691,8 +691,8 @@ export type UserUncheckedCreateWithoutRefreshTokenInput = {
   password: string
   username: string
   avatarUrl?: string | null
-  activationLink?: string
   isActivated?: boolean
+  activationLink: string
   isBanned?: boolean
   acceptedTerms?: boolean
   createdAt?: Date | string
@@ -723,8 +723,8 @@ export type UserUpdateWithoutRefreshTokenInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -739,8 +739,8 @@ export type UserUncheckedUpdateWithoutRefreshTokenInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isActivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  activationLink?: Prisma.StringFieldUpdateOperationsInput | string
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -786,8 +786,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   password?: boolean
   username?: boolean
   avatarUrl?: boolean
-  activationLink?: boolean
   isActivated?: boolean
+  activationLink?: boolean
   isBanned?: boolean
   acceptedTerms?: boolean
   createdAt?: boolean
@@ -804,8 +804,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   password?: boolean
   username?: boolean
   avatarUrl?: boolean
-  activationLink?: boolean
   isActivated?: boolean
+  activationLink?: boolean
   isBanned?: boolean
   acceptedTerms?: boolean
   createdAt?: boolean
@@ -818,8 +818,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   password?: boolean
   username?: boolean
   avatarUrl?: boolean
-  activationLink?: boolean
   isActivated?: boolean
+  activationLink?: boolean
   isBanned?: boolean
   acceptedTerms?: boolean
   createdAt?: boolean
@@ -832,15 +832,15 @@ export type UserSelectScalar = {
   password?: boolean
   username?: boolean
   avatarUrl?: boolean
-  activationLink?: boolean
   isActivated?: boolean
+  activationLink?: boolean
   isBanned?: boolean
   acceptedTerms?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "username" | "avatarUrl" | "activationLink" | "isActivated" | "isBanned" | "acceptedTerms" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "username" | "avatarUrl" | "isActivated" | "activationLink" | "isBanned" | "acceptedTerms" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cart?: boolean | Prisma.User$cartArgs<ExtArgs>
   smartphones?: boolean | Prisma.User$smartphonesArgs<ExtArgs>
@@ -863,8 +863,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     password: string
     username: string
     avatarUrl: string | null
-    activationLink: string
     isActivated: boolean
+    activationLink: string
     isBanned: boolean
     acceptedTerms: boolean
     createdAt: Date
@@ -1300,8 +1300,8 @@ export interface UserFieldRefs {
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly username: Prisma.FieldRef<"User", 'String'>
   readonly avatarUrl: Prisma.FieldRef<"User", 'String'>
-  readonly activationLink: Prisma.FieldRef<"User", 'String'>
   readonly isActivated: Prisma.FieldRef<"User", 'Boolean'>
+  readonly activationLink: Prisma.FieldRef<"User", 'String'>
   readonly isBanned: Prisma.FieldRef<"User", 'Boolean'>
   readonly acceptedTerms: Prisma.FieldRef<"User", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>

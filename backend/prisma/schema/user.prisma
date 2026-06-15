@@ -7,8 +7,10 @@ model User {
     username String @unique
     avatarUrl String? @map("avatar_url")
 
-    activationLink String @unique @default(cuid())
-    isActivated Boolean @default(false)
+    isActivated Boolean @default(false) @map("is_activated")
+
+    activationLink String @unique @map("activation_link")
+
     isBanned Boolean @default(false)
     acceptedTerms Boolean @default(false) @map("accepted_terms")
 
