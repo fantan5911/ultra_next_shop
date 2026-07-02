@@ -8,5 +8,6 @@ export function HomeLoading() {
                 <HomeLoadingCard key={i} />
             ))}
         </div>
+        
     );
 }

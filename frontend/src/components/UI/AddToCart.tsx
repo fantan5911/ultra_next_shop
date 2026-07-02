@@ -1,73 +1,108 @@
-'use client'
+"use client";
 
+import { PAGES } from "@/config/pages.config";
 import authService from "@/service/auth.service";
 import cart_itemService from "@/service/cart_item.service";
 import { useAuthStore } from "@/store/auth.store";
-import { Check } from "lucide-react";
+import { Check, LoaderCircle } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-
 interface Props {
-    smartphoneId: string;
-    price: number;
+  smartphoneId: string;
+  price: number;
 }
 
+export function AddToCart({ smartphoneId, price }: Props) {
+  const router = useRouter();
 
-export function AddToCart({smartphoneId, price}: Props) {
-    const isAuth = useAuthStore(state => state.isAuth);
-    const setIsAuth = useAuthStore(state => state.setIsAuth);
-    const [inCart, setInCart] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(false);
+  const isAuth = useAuthStore((state) => state.isAuth);
+  const setIsAuth = useAuthStore((state) => state.setIsAuth);
+  const [inCart, setInCart] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [banned, setIsBanned] = useState<boolean>(false);
 
-    useEffect(() => {
-        setLoading(true)
-        if (!isAuth) {
-            return;
-        };
+  useEffect(() => {
+    setLoading(true);
 
-        const checkItemInCart = async () => {
-            const response = await cart_itemService.getCartItemBySmartphoneId(smartphoneId);
-            if (response) {
-                setInCart(true);
-            }
-            setLoading(false);
-        }
-        checkItemInCart();
-    }, [smartphoneId, isAuth])
+    const checkItemInCart = async () => {
+      const response =
+        await cart_itemService.getCartItemBySmartphoneId(smartphoneId);
+      if (response.status === 200 && response.data) {
+        setInCart(true);
+      } else if (response.status === 403) {
+        setIsBanned(true);
+      }
+      setLoading(false);
+    };
+    if (isAuth) {
+      checkItemInCart();
+    } else {
+      setLoading(false);
+    }
+  }, [smartphoneId, isAuth]);
 
-    if (!isAuth) {
-        return <></>;
+  const addItemToCart = async () => {
+    const response = await cart_itemService.addItemToCart(smartphoneId);
+
+    if (response.status === 403) {
+      setIsBanned(true);
+      router.push(PAGES.BANNED);
     }
 
-    const addItemToCart = async () => {
-        const response = await cart_itemService.addItemToCart(smartphoneId);
-        if (response) {
-            setInCart(true);
-        }
+    if (response != undefined && response.status === 200) {
+      setInCart(true);
     }
+  };
 
-    return (
-        <div className="px-8 py-5 flex flex-col sm:flex-row items-center justify-between bg-white/5 mt-auto rounded-2xl">
-            <div>
-                <p className="font-serif text-white/70">стоимость</p>
-                <p className="text-2xl font-extrabold">{price} ₽</p>
-            </div>
-            {inCart ? (
-                <Check color="white" size={32} />
-            ) : (
+  return (
+    <div className="px-8 py-5 flex flex-col sm:flex-row items-center justify-between bg-white/5 mt-auto rounded-2xl">
+      <div>
+        <p className="font-serif text-white/70">стоимость</p>
+        <p className="text-2xl font-extrabold">{price} ₽</p>
+      </div>
+      {inCart ? (
+        <Check color="white" size={32} />
+      ) : (
+        <>
+          {!isAuth ? (
             <>
-            {loading ? (
-                <></>
-             ) : (
-                <button className="text-sm text-black font-semibold px-7 py-2 uppercase
+              {loading ? (
+                <LoaderCircle size={30} className="animate-spin" />
+              ) : (
+                <Link
+                  href={PAGES.LOGIN}
+                  className="text-sm text-black font-semibold px-7 py-2 uppercase
                 bg-white rounded-2xl cursor-pointer hover:bg-white/90 transition-colors duration-200"
-                onClick={addItemToCart}
                 >
-                    В КОРЗИНУ
-                </button>
-             )}
+                  В КОРЗИНУ
+                </Link>
+              )}
             </>
-            )}
-        </div>
-    )
+          ) : (
+            <>
+              {loading ? (
+                <LoaderCircle size={30} className="animate-spin" />
+              ) : (
+                <>
+                  {banned ? (
+                    <></>
+                  ) : (
+                    <button
+                      className="text-sm text-black font-semibold px-7 py-2 uppercase
+                  bg-white rounded-2xl cursor-pointer hover:bg-white/90 transition-colors duration-200"
+                      onClick={addItemToCart}
+                    >
+                      В КОРЗИНУ
+                    </button>
+                  )}
+                </>
+              )}
+            </>
+          )}
+        </>
+      )}
+    </div>
+  );
 }

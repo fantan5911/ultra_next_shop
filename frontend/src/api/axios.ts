@@ -3,74 +3,85 @@ import { AuthResponse } from "@/shared/response/auth.response";
 import axios from "axios";
 
 export const $api = axios.create({
-    withCredentials: true,
-    baseURL: API_URL
-})
+  withCredentials: true,
+  baseURL: API_URL,
+});
 
-$api.interceptors.request.use(async config => {
-    if (typeof window === 'undefined') {
-        return config;
-    }
+let refreshPromise: Promise<AuthResponse | null> | null = null;
 
-    const Cookies = (await import('js-cookie')).default;
-    const token = Cookies.get('accessToken');
-    if (token) {
-        const headers = config.headers ?? {};
-        (headers as any).Authorization = `Bearer ${token}`;
-        config.headers = headers;
-    }
+const performRefresh = async (): Promise<AuthResponse | null> => {
+  try {
+    const response = await axios.get<AuthResponse>(`${API_URL}/users/refresh`, {
+      withCredentials: true,
+      timeout: 5000,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+$api.interceptors.request.use(async (config) => {
+  if (typeof window === "undefined") {
     return config;
-})
+  }
 
-function deleteCookie(name: string) {
-    // Удаляем с разными комбинациями path
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=localhost;`;
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.localhost;`;
-    
-    // Если был установлен другой путь
-    const currentPath = window.location.pathname;
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${currentPath};`;
-}
+  const Cookies = (await import("js-cookie")).default;
+  const token = Cookies.get("accessToken");
+  if (token) {
+    const headers = config.headers ?? {};
+    (headers as any).Authorization = `Bearer ${token}`;
+    config.headers = headers;
+  }
+  return config;
+});
 
-$api.interceptors.response.use(config => {
+$api.interceptors.response.use(
+  (config) => {
     return config;
-}, async error => {
+  },
+  async (error) => {
     const originalRequest = error.config;
     if (!originalRequest) {
+      return Promise.reject(error);
+    }
+
+    const isRefreshRequest = originalRequest.url?.includes("/users/refresh");
+
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._isRetry &&
+      !isRefreshRequest
+    ) {
+      originalRequest._isRetry = true;
+
+      if (typeof window === "undefined") {
         return Promise.reject(error);
-    }
+      }
 
-    const isRefreshRequest = originalRequest.url?.includes('/users/refresh');
-    
-    if (error.response?.status === 401 && !originalRequest._isRetry && !isRefreshRequest) {
-        originalRequest._isRetry = true;
-
-        if (typeof window === 'undefined') {
-            return Promise.reject(error);
+      try {
+        if (!refreshPromise) {
+          refreshPromise = performRefresh();
         }
 
-        try {
-            const response = await axios.get<AuthResponse>(`${API_URL}/users/refresh`, {withCredentials: true});
-            const Cookies = (await import('js-cookie')).default;
-            Cookies.set('accessToken', response.data.accessToken);
-            return $api.request(originalRequest);
+        const data = await refreshPromise;
+        refreshPromise = null;
+
+        if (data?.accessToken) {
+          const Cookies = (await import("js-cookie")).default;
+          Cookies.set("accessToken", data.accessToken);
         }
-        catch (e) {
-            const Cookies = (await import('js-cookie')).default;
-            Cookies.remove('accessToken');
-            console.log('НЕ АВТОРИЗОВАН', e);
-            return Promise.reject(e);
-        }
-    }
-    
-    else if (error.response?.status === 401) {
-        document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=localhost;';
-    
-        // Проверка: что осталось?
-        console.log('После удаления, куки:', document.cookie);
+
+        return $api.request(originalRequest);
+      } catch (error) {
+        refreshPromise = null;
+        const Cookies = (await import("js-cookie")).default;
+        Cookies.remove("accessToken");
+        console.log("НЕ АВТОРИЗОВАН", error);
+        return Promise.reject(error);
+      }
     }
 
     return Promise.reject(error);
-})
-
+  },
+);

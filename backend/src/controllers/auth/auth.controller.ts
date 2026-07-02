@@ -4,9 +4,6 @@ import userService from "../../service/user.service";
 import { ENV } from "../../env";
 import { registerValidate } from "../../validations/user/register.validate";
 import { loginValidate } from "../../validations/user/login.validate";
-import tokenService from "../../service/token.service";
-import UserDto from "../../dto/user.dto";
-import { IUser } from "../../types/user.types";
 
 class AuthController {
   async Register(req: Request, res: Response, next: NextFunction) {
@@ -129,11 +126,6 @@ class AuthController {
       next(e);
     }
   }
-  checkAuth(req: Request, res: Response, next: NextFunction) {
-    const userDto = new UserDto(req.user as IUser);
-    const tokens = tokenService.generateTokens(userDto);
-    return tokens;
-  }
 
   async activate(req: Request, res: Response, next: NextFunction) {
     try {
@@ -148,12 +140,21 @@ class AuthController {
       });
 
       if (userData.user.isActivated) {
-        return res.status(200).json({
-          message: "Этот аккаунт уже активирован",
-        });
+        return res.status(200).json(userData);
       }
-      // return res.redirect(ENV.CLIENT_URL);
+
       return res.redirect(ENV.CLIENT_URL);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async checkBan(req: Request, res: Response, next: NextFunction) {
+    try {
+      const accessToken = req.headers.authorization?.split(" ")[1] as string;
+      const user = await userService.checkBan(accessToken);
+
+      return res.status(200).json(user);
     } catch (e) {
       next(e);
     }

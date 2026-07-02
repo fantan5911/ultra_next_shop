@@ -1,3 +1,4 @@
+import { ca } from "zod/v4/locales";
 import { prisma } from "..";
 import ApiError from "../errors/api.error";
 
@@ -47,6 +48,9 @@ class cartItemService {
         AND: [{ cartId: cartId }, { smartphoneId: smartphoneId }],
       },
     });
+    if (!cart_item) {
+      throw ApiError.NotFound("Товар не найден в корзине");
+    }
     return cart_item;
   }
 
@@ -60,6 +64,20 @@ class cartItemService {
     await prisma.cartItem.delete({
       where: { id: cartItemId },
     });
+  }
+
+  async updateCount(cartItemId: string, count: number) {
+    const cart_item = await prisma.cartItem.findUnique({
+      where: { id: cartItemId },
+    });
+    if (!cart_item) {
+      throw ApiError.NotFound("Не найден элемент корзины с данным id");
+    }
+    const updatedCartItem = await prisma.cartItem.update({
+      where: { id: cartItemId },
+      data: { count: count },
+    });
+    return updatedCartItem;
   }
 }
 

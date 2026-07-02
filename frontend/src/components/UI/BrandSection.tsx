@@ -47,7 +47,10 @@ export function BrandSection({
       </div>
 
       {open && (
-        <ul className="absolute z-10 mt-2 w-full max-h-60 overflow-y-auto rounded-2xl border border-white/20 bg-black/90 backdrop-blur-md">
+        <ul
+          className="absolute z-10 mt-2 w-full max-h-60 overflow-y-auto rounded-2xl border
+         border-white/20 bg-black/90 backdrop-blur-md"
+        >
           {brands.map((brand) => (
             <Option
               key={brand.id}

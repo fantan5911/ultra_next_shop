@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 export function NavBar() {
   const isAuth = useAuthStore((state) => state.isAuth);
   const setIsAuth = useAuthStore((state) => state.setIsAuth);
+  const [loading, setLoading] = useState<boolean>(true);
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
 
@@ -24,12 +25,30 @@ export function NavBar() {
   };
 
   useEffect(() => {
+    let isMounted = true;
     setMounted(true);
+
     async function checkAuth() {
-      const response = (await authService.checkAuth()) as boolean;
-      setIsAuth(!!response);
+      try {
+        const response = await authService.checkAuth();
+        if (isMounted) {
+          setIsAuth(response);
+          setLoading(false);
+        }
+      } catch (error) {
+        if (isMounted) {
+          console.error("Auth check failed:", error);
+          setIsAuth(false);
+          setLoading(false);
+        }
+      }
     }
+
     checkAuth();
+
+    return () => {
+      isMounted = false;
+    };
   }, [setIsAuth]);
 
   const handleSearchClick = () => {
@@ -56,48 +75,42 @@ export function NavBar() {
           </div>
 
           <div className="hidden sm:flex sm:w-[25%] gap-3 md:gap-5 justify-end items-center">
-            {!mounted ? (
-              <Link
-                href={PAGES.LOGIN}
-                className="px-4 md:px-5 py-2 text-sm text-black bg-white rounded-3xl
-                hover:bg-gray-200
-                 transition-colors duration-150 whitespace-nowrap
-                "
-              >
-                Войти
-              </Link>
-            ) : isAuth ? (
-              <>
-                <Link
-                  href={PAGES.SMARTPHONE_CREATE}
-                  className="flex items-center gap-1 px-3 md:px-4 py-2 text-sm font-semibold text-black bg-white rounded-2xl
+            {!loading ? (
+              isAuth ? (
+                <>
+                  <Link
+                    href={PAGES.SMARTPHONE_CREATE}
+                    className="flex items-center gap-1 px-3 md:px-4 py-2 text-sm font-semibold text-black bg-white rounded-2xl
                   border border-transparent hover:bg-black hover:border-white hover:text-white
                   transition-colors duration-150 whitespace-nowrap"
-                >
-                  <Plus size={18} strokeWidth={2} />
-                  <span className="hidden xl:inline">Публикация</span>
-                </Link>
-                <Link
-                  href={PAGES.CART}
-                  className="text-white hover:text-white/70"
-                >
-                  <ShoppingCart size={22} strokeWidth={2} />
-                </Link>
-                <button className="cursor-pointer" onClick={Logout}>
-                  <LogOut
+                  >
+                    <Plus size={18} strokeWidth={2} />
+                    <span className="hidden xl:inline">Публикация</span>
+                  </Link>
+                  <Link
+                    href={PAGES.CART}
                     className="text-white hover:text-white/70"
-                    size={20}
-                  />
-                </button>
-              </>
+                  >
+                    <ShoppingCart size={22} strokeWidth={2} />
+                  </Link>
+                  <button className="cursor-pointer" onClick={Logout}>
+                    <LogOut
+                      className="text-white hover:text-white/70"
+                      size={20}
+                    />
+                  </button>
+                </>
+              ) : (
+                <Link
+                  href={PAGES.LOGIN}
+                  className="px-4 md:px-5 py-2 text-sm border border-white text-black bg-white rounded-3xl
+                hover:bg-black hover:border-white hover:text-white transition-colors duration-150 whitespace-nowrap shadow-md shadow-white/5"
+                >
+                  Войти
+                </Link>
+              )
             ) : (
-              <Link
-                href={PAGES.LOGIN}
-                className="px-4 md:px-5 py-2 text-sm border border-white text-black bg-white rounded-3xl
-                hover:bg-black hover:border-white hover:text-white transition-colors duration-150 whitespace-nowrap"
-              >
-                Войти
-              </Link>
+              <></>
             )}
           </div>
 
@@ -107,7 +120,7 @@ export function NavBar() {
 
       <div className="h-16" />
 
-      {mounted && isAuth && (
+      {!loading && isAuth && (
         <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-black border-t border-white/20 z-40">
           <div className="flex justify-around items-center py-2">
             <Link
@@ -162,6 +175,21 @@ export function NavBar() {
               <span className="text-[10px]">Выйти</span>
             </button>
           </div>
+
+          <div className="flex items-center justify-center gap-3 border-t border-white/10 px-2 py-2 text-[10px] text-zinc-400">
+            <Link
+              href={PAGES.TERMS}
+              className="transition-colors hover:text-white"
+            >
+              Соглашение
+            </Link>
+            <Link
+              href={PAGES.POLICY}
+              className="transition-colors hover:text-white"
+            >
+              Политика
+            </Link>
+          </div>
         </div>
       )}
 
@@ -169,10 +197,26 @@ export function NavBar() {
         <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-black border-t border-white/20 z-40 p-4">
           <Link
             href={PAGES.LOGIN}
-            className="flex items-center justify-center w-full px-4 py-3 text-sm text-black bg-white rounded-3xl"
+            className="flex items-center justify-center w-full px-4 py-3 text-sm shadow-md shadow-white/5 font-semibold text-center
+             border border-white hover:border-white/70 hover:text-white/70 transition-colors duration-150
+             text-black bg-white rounded-3xl"
           >
             Войти
           </Link>
+          <div className="mt-3 flex items-center justify-center gap-3 text-[11px] text-zinc-400">
+            <Link
+              href={PAGES.TERMS}
+              className="transition-colors hover:text-white"
+            >
+              Соглашение
+            </Link>
+            <Link
+              href={PAGES.POLICY}
+              className="transition-colors hover:text-white"
+            >
+              Политика
+            </Link>
+          </div>
         </div>
       )}
 

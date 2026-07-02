@@ -1,85 +1,125 @@
 import { $api } from "@/api/axios";
 import { API_URL } from "@/constants/api.url";
 import { AuthResponse } from "@/shared/response/auth.response";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
-const isBrowser = typeof window !== 'undefined';
+const isBrowser = typeof window !== "undefined";
 
 async function getCookies() {
-    if (!isBrowser) return null;
-    const Cookies = (await import('js-cookie')).default;
-    return Cookies;
+  if (!isBrowser) return null;
+  const Cookies = (await import("js-cookie")).default;
+  return Cookies;
 }
 
 class AuthService {
-    async Register(email: string, username: string, password: string, acceptedTerms: boolean): Promise<AxiosResponse<AuthResponse | undefined> | void> {
-        try {
-            const response = await $api.post<AuthResponse>(`/users/register`, {
-                email: email,
-                username: username,
-                password: password,
-                accepted_terms: acceptedTerms
-            })
-            console.log(response);
-            if (response.status == 200 && response?.data.accessToken) {
-                const Cookies = await getCookies();
-                Cookies?.set('accessToken', response?.data.accessToken);
-            }
+  async Register(
+    email: string,
+    username: string,
+    password: string,
+    acceptedTerms: boolean,
+  ) {
+    try {
+      const response = await $api.post(`/users/register`, {
+        email: email,
+        username: username,
+        password: password,
+        accepted_terms: acceptedTerms,
+      });
+      console.log(response);
+      if (response.status == 200) {
+        return response;
+      }
 
-            return response;
-        }
-        catch (error: any) {
-            console.log(error.response);
-            return error.response;
-        }
+      return response;
+    } catch (error: any) {
+      console.log(error.response);
+      return error.response;
+    }
+  }
+  async Login(email: string, password: string) {
+    try {
+      const response = await $api.post<AuthResponse>(`/users/login`, {
+        email: email,
+        password: password,
+      });
+      console.log(response);
+      if (response.status === 200 && response?.data.accessToken) {
+        const Cookies = await getCookies();
+        Cookies?.set("accessToken", response?.data.accessToken);
+      }
+      return response;
+    } catch (error: any) {
+      console.log(error.response);
+      return error.response;
+    }
+  }
 
-    }
-    async Login(email: string, password: string) {
-        try {
-            const response = await $api.post<AuthResponse>(`/users/login`, {
-                email: email,
-                password: password
-            }) 
-            console.log(response);
-            if (response.status === 200 && response?.data.accessToken) {
-                const Cookies = await getCookies();
-                Cookies?.set('accessToken', response?.data.accessToken);
-            }
-            return response;
+  async Logout() {
+    try {
+      const response = await $api.get("/users/logout");
+      if (response.status === 200) {
+        const Cookies = await getCookies();
+        if (Cookies) {
+          Cookies.remove("accessToken");
         }
-        catch (error: any) {
-            console.log(error.response);
-            return error.response;
-        }
+        return true;
+      }
+    } catch (error: any) {
+      console.log(error.response);
+      const Cookies = await getCookies();
+      if (Cookies) {
+        Cookies.remove("accessToken");
+      }
     }
+  }
 
-    async Logout() {
-        try {
-            const response = await $api.get('/users/logout');
-            if (response.status === 200) {
-                return true;
-            }
-        }
-        catch (error: any) {
-            console.log(error.response);
-            return error.response;
-        }
-    }
+  async checkAuth() {
+    try {
+      const Cookies = await getCookies();
+      if (!Cookies) {
+        return false;
+      }
 
-    async checkAuth() {
-        try {
-            const response = await $api.get(`/users/refresh`);
-            const Cookies = await getCookies();
-            if (Cookies && response.data.accessToken) {
-                Cookies.set('accessToken', response.data.accessToken);
-            }
-            return true;
-        } 
-        catch (error: any) {
-            console.log('Ошибка авторизации:', error.response?.status, error.message);
-            return false;
-        }
+      if (Cookies.get("accessToken")) {
+        return true;
+      }
+
+      const response = await $api.get(`/users/refresh`, {
+        timeout: 3000,
+      });
+
+      if (response.data?.accessToken) {
+        Cookies.set("accessToken", response.data.accessToken);
+        return true;
+      }
+
+      return false;
+    } catch (error: any) {
+      console.log("Ошибка авторизации:", error.response?.status, error.message);
+      const Cookies = await getCookies();
+      if (Cookies?.get("accessToken")) {
+        return true;
+      }
+      return false;
     }
+  }
+
+  async activate(activationLink: string) {
+    try {
+      const response = await axios.get(
+        `${API_URL}/users/activate/${activationLink}`,
+      );
+      if (response.status === 200) {
+        return response.data.message;
+      }
+    } catch (error: any) {
+      if (error.response.status === 400) {
+        return "Некорректная ссылка для активации";
+      } else {
+        return "Произошла ошибка";
+      }
+    }
+  }
 }
 
 export default new AuthService();

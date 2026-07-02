@@ -66,7 +66,7 @@ class UserService {
     });
     // await mailService.sendActivationMail(
     //   email,
-    //   `${ENV.API_URL}/api/users/activate/${user.activationLink}`,
+    //   `${ENV.CLIENT_URL}/activate/${user.activationLink}`,
     // );
 
     return {
@@ -220,11 +220,16 @@ class UserService {
   }
 
   async activate(activationLink: string) {
+    let message: string = "Аккаунт успешно активирован";
     const user = await prisma.user.findUnique({
       where: { activationLink: activationLink },
     });
     if (!user) {
       throw ApiError.BadRequest("Некорректная ссылка активации");
+    }
+
+    if (user.isActivated) {
+      message = "Аккаунт уже активирован";
     }
     const updatedUser = await prisma.user.update({
       where: { id: user.id },
@@ -240,12 +245,21 @@ class UserService {
     const tokens = tokenService.generateTokens({ ...userDto });
     await tokenService.saveToken(updatedUser.id, tokens.refreshToken);
 
-    return { ...tokens, user: userDto };
+    return { ...tokens, user: userDto, message };
   }
 
-  // checkAuth(accessToken: string) {
-  //     const accessToken = validateAc
-  // }
+  async checkBan(accessToken: string) {
+    const tokenData = tokenService.validateAccessToken(accessToken) as IUser;
+    const user = await prisma.user.findUnique({
+      where: {
+        id: tokenData.id,
+      },
+    });
+    if (user?.isBanned) {
+      throw ApiError.forbidden("Ваш аккаунт забанен навсегда");
+    }
+    return user;
+  }
 }
 
 export default new UserService();

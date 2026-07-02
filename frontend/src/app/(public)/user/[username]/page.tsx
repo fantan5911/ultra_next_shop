@@ -2,7 +2,8 @@ import { User } from "@/components/UI/User";
 import userService from "@/service/user.service";
 import { IUser } from "@/shared/types/user.types";
 import { redirect } from "next/navigation";
-import BannedPage from "../../banned/page";
+import { UserPageClient } from "@/components/UI/UserPageClient";
+import { PAGES } from "@/config/pages.config";
 
 type Params = {
   username: string;
@@ -30,7 +31,7 @@ export default async function UserPage({
   }
 
   if (user.isBanned) {
-    return <BannedPage />;
+    redirect(PAGES.BANNED);
   }
 
   return (
@@ -41,6 +42,7 @@ export default async function UserPage({
           avatarUrl={user.avatarUrl}
           isBanned={user.isBanned}
         />
+        <UserPageClient username={user.username} />
       </div>
     </div>
   );

@@ -2,73 +2,91 @@ import { $api } from "@/api/axios";
 import { API_URL } from "@/constants/api.url";
 import { ISmartphone } from "@/shared/types/smartphone.types";
 
-
 class SmartPhoneService {
-    async addSmartphone
-    (name: string,
+  async addSmartphone(
+    name: string,
     description: string,
-    specifications: string, 
-    price: number, 
+    specifications: string,
+    price: number,
     imageUrl: string,
-    brandId: string
-    ) {
-        try {
-            const response = await $api.post('/smartphones/add', {
-                name: name,
-                description: description,
-                specifications: specifications,
-                price: price,
-                imageUrl: imageUrl,
-                brandId: brandId
-            });
-            if (response?.status === 200) {
-                console.log(response);
-                return response;
-            }
-        }
-        catch (error: any) {
-            console.log(error.response);
-            return error.response;
-        }
-    }
-
-    async getSmartphones(): Promise<ISmartphone[]> {
+    brandId: string,
+  ) {
     try {
-        const response = await fetch(`${API_URL}/smartphones`, {
-            next: {
-                revalidate: 40
-            }
-        });
-        // await new Promise(resolve => setTimeout(resolve, 100));
-        
-        if (!response.ok) {
-            throw new Error('Failed to fetch smartphones');
-        }
-        
-        return await response.json();
+      const response = await $api.post("/smartphones/add", {
+        name: name,
+        description: description,
+        specifications: specifications,
+        price: price,
+        imageUrl: imageUrl,
+        brandId: brandId,
+      });
+      if (response?.status === 200) {
+        console.log(response);
+        return response;
+      }
+    } catch (error: any) {
+      console.log(error.response);
+      return error.response;
+    }
+  }
+
+  async getSmartphones(): Promise<ISmartphone[]> {
+    try {
+      const response = await fetch(`${API_URL}/smartphones`, {
+        next: {
+          revalidate: 40,
+        },
+      });
+      // await new Promise(resolve => setTimeout(resolve, 100));
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch smartphones");
+      }
+
+      return await response.json();
     } catch (error) {
-        console.error("Ошибка при загрузке смартфонов:", error);
-        return [];
-        }
+      console.error("Ошибка при загрузке смартфонов:", error);
+      return [];
+    }
+  }
+
+  async getSmartPhoneById(smartPhoneid: string): Promise<ISmartphone> {
+    const response = await fetch(`${API_URL}/smartphones/id/${smartPhoneid}`, {
+      next: {
+        revalidate: 40,
+      },
+    });
+    // await new Promise(resolve => setTimeout(resolve, 100));
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error("404");
+      }
+      throw new Error("Failed to fetch smartphone");
     }
 
-    async getSmartPhoneById(smartPhoneid: string): Promise<ISmartphone> {
-        const response = await fetch(`${API_URL}/smartphones/id/${smartPhoneid}`, {
-            next: {
-                revalidate: 40
-            }
-        })
-        // await new Promise(resolve => setTimeout(resolve, 100));
-        
-        if (!response.ok) {
-            if (response.status === 404) {
-                throw new Error('404');
-            }
-            throw new Error('Failed to fetch smartphone');
-        }
-        
-        return await response.json();
+    return await response.json();
+  }
+
+  async getSmartphonesByUsername(userId: string): Promise<ISmartphone[]> {
+    try {
+      const response = await fetch(
+        `${API_URL}/smartphones/username/${userId}`,
+        {
+          next: {
+            revalidate: 40,
+          },
+        },
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch smartphones");
+      }
+      return await response.json();
+    } catch (error: any) {
+      console.error("Error fetching smartphones by username:", error);
+      return [];
     }
+  }
 }
 
 export default new SmartPhoneService();

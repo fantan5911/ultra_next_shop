@@ -10,15 +10,15 @@ class MailService {
       port: 587,
       secure: false,
       auth: {
-        user: "ruby.heaney@ethereal.email",
-        pass: "KEEcuWQBpyt6qXmgmn",
+        user: "ezequiel93@ethereal.email",
+        pass: "KSwQcKZcG8WEcFRZfp",
       },
     });
   }
 
   async sendActivationMail(to: string, link: string) {
     await this.transporter.sendMail({
-      from: "fletcher.bogan@ethereal.email",
+      from: "ezequiel93@ethereal.email",
       to,
       subject: `Активация активация аккаунта на ${ENV.API_URL}`,
       text: "",

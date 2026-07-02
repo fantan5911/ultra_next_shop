@@ -4,11 +4,17 @@ import smartphoneController from "../controllers/smartphones/smartphone.controll
 
 const router = Router();
 
-router.post("/add", AuthMiddleware({checkBan: true}), smartphoneController.addSmartphone);
+router.post(
+  "/add",
+  AuthMiddleware({ checkBan: true }),
+  smartphoneController.addSmartphone,
+);
 router.get("/", smartphoneController.getSmartphones);
 router.get("/id/:id", smartphoneController.getSmartPhoneById);
 router.get("/user/:id", smartphoneController.getSmartphonesByUserId);
-
-
+router.get(
+  "/username/:username",
+  smartphoneController.getSmartphonesByUsername,
+);
 
 export default router;
