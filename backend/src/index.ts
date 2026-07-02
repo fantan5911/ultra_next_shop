@@ -1,47 +1,51 @@
-import express from 'express';
-import cors from 'cors';
-import cookieParser from 'cookie-parser';
-import { ENV } from './env.js';
-import { PrismaClient } from './generated/prisma/client';
-import pg from 'pg';
-import { PrismaPg } from '@prisma/adapter-pg';
-import router from './routes/route';
-import errorMiddleware from './middlewares/error.middleware';
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import { ENV } from "./env.js";
+import { PrismaClient } from "./generated/prisma/client";
+import pg from "pg";
+import { PrismaPg } from "@prisma/adapter-pg";
+import router from "./routes/route";
+import errorMiddleware from "./middlewares/error.middleware";
 
-const {Pool} = pg;
+const { Pool } = pg;
 
-const pool: any = new Pool({connectionString: ENV.DATABASE_URL});
+const pool: any = new Pool({ connectionString: ENV.DATABASE_URL });
 const adapter = new PrismaPg(pool);
-export const prisma = new PrismaClient({adapter});
+export const prisma = new PrismaClient({ adapter });
 
 const app = express();
 
 app.use(express.json());
-app.use(cors({
+app.use(
+  cors({
     origin: [
-        "http://localhost",
-        "http://localhost:3000",
-        "http://localhost:2000",
-        "http://localhost:4173",
-        "https://ultra_next_frontend.vercel.app",
-        "https://ultra_next_admin.vercel.app",
-        "http://186.246.29.122:3000",
-        "http://186.246.29.122:2000"
+      "http://localhost",
+      "http://localhost:3000",
+      "http://localhost:2000",
+      "http://localhost:4173",
+      "https://ultra_next_frontend.vercel.app",
+      "https://ultra_next_admin.vercel.app",
+      "http://186.246.29.122:3000",
+      "http://186.246.29.122:2000",
+      "ultranextshop-production.up.railway.app",
+      "https://ultranextshop-production.up.railway.app",
     ],
-    credentials: true
-}));
+    credentials: true,
+  }),
+);
 app.use(cookieParser());
-app.use('/api', router);
+app.use("/api", router);
 app.use(errorMiddleware);
 
-
 const start = () => {
-    try {
-        app.listen(ENV.PORT, () => console.log(`🚀 Server running on [32mhttp://localhost:${ENV.PORT}[0m`));
-    }
-    catch (e) {
-        console.log(e)
-    }
-}
+  try {
+    app.listen(ENV.PORT, () =>
+      console.log(`🚀 Server running on [32mhttp://localhost:${ENV.PORT}[0m`),
+    );
+  } catch (e) {
+    console.log(e);
+  }
+};
 
-start()
+start();
