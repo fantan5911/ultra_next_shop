@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.CLIENT_URL || "http://localhost:3000",
+  siteUrl: "https://ultranextshop-production.up.railway.app",
   generateRobotsTxt: false,
   sitemapSize: 7000,
   changefreq: "daily",
