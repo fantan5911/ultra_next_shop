@@ -3,6 +3,8 @@ export const PAGES = {
   SMARTPHONE: (smartphoneId: string) => `/smartphone/id/${smartphoneId}`,
   SMARTPHONE_CREATE: "/smartphone/create",
   USER: (username: string) => `/user/${username}`,
+  PROFILE: "/profile",
+  SETTINGS: "/settings",
   BANNED: "/banned",
   SEND: "/send",
   REGISTER: "/register",

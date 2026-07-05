@@ -1,6 +1,7 @@
 "use client";
 
 import { Plus, ShoppingCart, LogOut, Search } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { SearchInput } from "./serchInput";
 import { PAGES } from "@/config/pages.config";
@@ -8,12 +9,17 @@ import { useAuthStore } from "@/store/auth.store";
 import { useEffect, useState } from "react";
 import authService from "@/service/auth.service";
 import { useRouter } from "next/navigation";
+import { API_URL } from "@/constants/api.url";
+import { UserModal } from "./UserModal";
 
 export function NavBar() {
   const isAuth = useAuthStore((state) => state.isAuth);
   const setIsAuth = useAuthStore((state) => state.setIsAuth);
+  const avatarUrl = useAuthStore((state) => state.avatarUrl);
+  const setAvatarUrl = useAuthStore((state) => state.setAvatarUrl);
   const [loading, setLoading] = useState<boolean>(true);
   const [mounted, setMounted] = useState(false);
+  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const router = useRouter();
 
   const Logout = async () => {
@@ -49,11 +55,14 @@ export function NavBar() {
     return () => {
       isMounted = false;
     };
-  }, [setIsAuth]);
+  }, [setIsAuth, setAvatarUrl]);
 
   const handleSearchClick = () => {
     router.push(PAGES.HOME);
   };
+
+  const toggleUserModal = () => setIsUserModalOpen((prev) => !prev);
+  const closeUserModal = () => setIsUserModalOpen(false);
 
   return (
     <>
@@ -93,12 +102,30 @@ export function NavBar() {
                   >
                     <ShoppingCart size={22} strokeWidth={2} />
                   </Link>
-                  <button className="cursor-pointer" onClick={Logout}>
-                    <LogOut
-                      className="text-white hover:text-white/70"
-                      size={20}
+                  <button
+                    type="button"
+                    className="flex items-center cursor-pointer"
+                    onClick={toggleUserModal}
+                  >
+                    <Image
+                      src={
+                        avatarUrl
+                          ? avatarUrl.startsWith("http")
+                            ? avatarUrl
+                            : "/avatar_user.png"
+                          : "/avatar_user.png"
+                      }
+                      alt="Профиль"
+                      width={34}
+                      height={34}
+                      className="rounded-full object-cover border border-white/20"
                     />
                   </button>
+                  <UserModal
+                    isOpen={isUserModalOpen}
+                    onClose={closeUserModal}
+                    onLogout={Logout}
+                  />
                 </>
               ) : (
                 <Link
@@ -167,13 +194,13 @@ export function NavBar() {
               <span className="text-[10px]">Корзина</span>
             </Link>
 
-            <button
+            {/* <button
               onClick={Logout}
               className="flex flex-col items-center gap-1 text-white py-2 px-3"
             >
               <LogOut size={20} strokeWidth={2} />
               <span className="text-[10px]">Выйти</span>
-            </button>
+            </button> */}
           </div>
 
           <div className="flex items-center justify-center gap-3 border-t border-white/10 px-2 py-2 text-[10px] text-zinc-400">
