@@ -45,8 +45,8 @@ export function UserModal({ isOpen, onClose, onLogout }: UserModalProps) {
         className="w-full flex items-center rounded-xl px-4
          py-3 text-sm gap-2 font-semibold text-white transition hover:bg-white/10 cursor-pointer"
         onClick={() => {
-          onClose();
           onLogout();
+          onClose();
         }}
       >
         <LogOut size={20} strokeWidth={2} />

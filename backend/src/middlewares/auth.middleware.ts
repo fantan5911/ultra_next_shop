@@ -15,11 +15,24 @@ declare global {
 export default function AuthMiddleware(options?: { checkBan?: boolean }) {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const authorization = req.headers.authorization;
+      let authorization = req.headers.authorization as string | undefined;
+      console.log("[auth.middleware] authorization header:", authorization);
+
+      if (!authorization && (req as any).cookies) {
+        const cookieToken = (req as any).cookies.accessToken as
+          | string
+          | undefined;
+        if (cookieToken) {
+          authorization = `Bearer ${cookieToken}`;
+          console.log("[auth.middleware] found accessToken in cookies");
+        }
+      }
+
       if (!authorization) {
         return next(ApiError.UnAuthorizedError());
       }
-      const token = authorization?.split(" ")[1];
+
+      const token = authorization.split(" ")[1];
       if (!token) {
         return next(ApiError.UnAuthorizedError());
       }
